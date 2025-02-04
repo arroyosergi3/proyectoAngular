@@ -1,1 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+.bg-m{
+  background-color: #2e2e2e;
+}
+.g{
+  font-size: 1.5rem;
+  }
+
+  .btn-m {
+      background-color: #f1f1f1;
+      border-color: #f1f1f1;
+      color: #2e2e2e;
+  }
+  .btn-m:hover {
+      background-color: #2e2e2e;
+      border: 1px solid #f1f1f1;
+      color: #f1f1f1;
+  }
+
+
+  .btn-outline-m{
+    background-color: transparent;
+    color: #f1f1f1;
+    border: 1px solid #f1f1f1;
+
+  }
+
+  .btn-outline-m:hover {
+    color: #2e2e2e;
+    background-color: #f1f1f1;
+    border-color: #f1f1f1;
+}
