@@ -8,15 +8,25 @@
   }
 
   .btn-m {
-      background-color: #f1f1f1;
-      border-color: #f1f1f1;
-      color: #2e2e2e;
-  }
-  .btn-m:hover {
-      background-color: #2e2e2e;
-      border: 1px solid #f1f1f1;
-      color: #f1f1f1;
-  }
+    background-color: #f1f1f1;
+    border-color: #f1f1f1;
+    color: #2e2e2e;
+}
+.btn-m:hover {
+    background-color: #2e2e2e;
+    border: 1px solid #f1f1f1;
+    color: #f1f1f1;
+}
+.btn-mo {
+  background-color: #2e2e2e;
+  border-color: #2e2e2e;
+  color: #f1f1f1;
+}
+.btn-mo:hover {
+  background-color: #f1f1f1;
+  border: 1px solid #2e2e2e;
+  color: #2e2e2e;
+}
 
 
   .btn-outline-m{
@@ -30,4 +40,8 @@
     color: #2e2e2e;
     background-color: #f1f1f1;
     border-color: #f1f1f1;
+}
+
+.b-m{
+border:1px solid #2e2e2e;
 }

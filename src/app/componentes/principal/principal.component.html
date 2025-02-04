@@ -3,7 +3,8 @@
 
   <!-- Row de toda la pagina-->
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-    <div class="mb-4 text-center col-md-2 col-lg-2">
+    <!-- Columna de filtros-->
+    <div class="mb-4 text-center col-md-2 col-lg-2 b-m">
       Aqui van a ir los filtros
     </div>
     <div class="mb-4 text-center col-md-10 col-lg-10">
@@ -13,8 +14,9 @@
           <img class="px-0 mx-0 card-img-top" src="{{ producto.ruta }}" alt="Card image">
           <div class="card-body">
             <h4 class="card-title">{{ producto.nombre }}</h4>
-            <p class="card-text">{{ producto.precio }} €</p>
-            <a href="#" class="btn btn-primary">Ver más</a>
+            <h5 class="card-text">{{ producto.precio }}€</h5>
+            <h6 class="card-text">{{ producto.marca }}</h6>
+            <a href="#" class="btn btn-mo">Ver más</a>
           </div>
         </div>
       </div>
