@@ -1,3 +1,11 @@
-<img src="" alt="">
-<p>Nombre: </p>
-<p>Precio: </p>
+<div class="row row-cols-1 row-cols-md-2 g-4">
+  <div class="col-lg-auto col-md-auto">
+    <img src="{{ producto.ruta }}" alt="{{ producto.nombre }}" />
+  </div>
+  <div class="col-lg-auto col-md-auto">
+    <h1>{{ producto.nombre }}</h1>
+    <h2>{{ producto.precio }}€ <span class="dia">/ día</span></h2>
+    <p>{{ producto.descripcion }}</p>
+    <app-alquilar-producto-component></app-alquilar-producto-component>
+  </div>
+</div>

@@ -1,5 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'bootstrap/dist/css/bootstrap.min.css';
+
+h1{
+  font-size: 5rem;;
+}
+h2{
+  font-size: 3rem;
+}
+.dia{
+  font-size: 1rem;
+  font-weight: normal;
+}
 .bg-m{
   background-color: #2e2e2e;
 }

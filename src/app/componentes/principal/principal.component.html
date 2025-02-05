@@ -16,7 +16,7 @@
             <h4 class="card-title">{{ producto.nombre }}</h4>
             <h5 class="card-text">{{ producto.precio }}€</h5>
             <h6 class="card-text">{{ producto.marca }}</h6>
-            <a href="#" class="btn btn-mo">Ver más</a>
+            <a href="#" [routerLink]="['/detalle', producto.id]"  class="btn btn-mo">Ver más</a>
           </div>
         </div>
       </div>
