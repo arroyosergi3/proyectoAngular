@@ -10,7 +10,7 @@
     <div class="mb-4 text-center col-md-10 col-lg-10">
       <!-- Row de productos-->
       <div class="text-center row align-content-center justify-content-center">
-        <div class="p-0 mx-4 my-4 card" style="width:300px" *ngFor="let producto of productos">
+        <div class="p-0 mx-4 my-4 card" style="width:300px" *ngFor="let producto of productosJson">
           <img class="px-0 mx-0 card-img-top" src="{{ producto.ruta }}" alt="Card image">
           <div class="card-body">
             <h4 class="card-title">{{ producto.nombre }}</h4>
