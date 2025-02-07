@@ -1,0 +1,16 @@
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="p-4 shadow card" style="width: 350px;">
+      <h3 class="mb-4 text-center">Iniciar Sesión</h3>
+      <form (ngSubmit)="onSubmit()"method="POST">
+          <div class="mb-3">
+              <label for="email" class="form-label">Correo Electrónico</label>
+              <input type="email" name="email" class="form-control" id="email" [(ngModel)]="email" placeholder="Ingrese su email" required>
+          </div>
+          <div class="mb-3">
+              <label for="contrasena" class="form-label">Contraseña</label>
+              <input type="contrasena" name="contrasena" class="form-control" id="contrasena" [(ngModel)]="contrasena" placeholder="Ingrese su contraseña" required>
+          </div>
+          <button type="submit" class="btn btn-mo w-100">Iniciar Sesión</button>
+      </form>
+  </div>
+</div>

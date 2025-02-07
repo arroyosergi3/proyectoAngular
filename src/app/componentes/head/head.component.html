@@ -7,7 +7,7 @@
         alt=""
         width="100"
         height="50"
-        class=" d-inline-block ms-5 "
+        class=" d-inline-block ms-5"
       />
     </a>
 
@@ -19,11 +19,13 @@
         placeholder="Buscar..."
         aria-label="Search"
       />
-      <button class=" btn btn-outline-m g " type="submit">Buscar</button>
+      <button class=" btn btn-outline-m g" type="submit">Buscar</button>
     </form>
 
     <!-- Botón de Login a mio la derecha -->
-    <button class="btn btn-primary me-5 g  btn-m">Login</button>
+    <button class="btn btn-primary me-5 g btn-m" *ngIf="!isAuthenticated;" onclick="window.location.href = 'login'" >Login</button>
+
+    <button class="btn btn-primary me-5 g btn-m" *ngIf="isAuthenticated"  onclick="window.location.href = ''">Mis Productos Alquilados</button>
     <!-- Botón de gestion a la derecha -->
     <button class="btn btn-primary me-5 g d-none ">Gestión Articulos</button>
   </div>

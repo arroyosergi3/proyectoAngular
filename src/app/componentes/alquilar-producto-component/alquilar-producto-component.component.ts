@@ -1,13 +1,14 @@
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-alquilar-producto-component',
-  imports: [],
+  imports: [ReactiveFormsModule],
+  standalone: true,
   templateUrl: './alquilar-producto-component.component.html',
   styleUrl: './alquilar-producto-component.component.css'
 })
-export class AlquilarProductoComponent {
+export class AlquilarProductoComponent implements OnInit{
   formulario: FormGroup;
   productos = [
     {
@@ -57,6 +58,16 @@ export class AlquilarProductoComponent {
     }
   ];
   producto: any;
+  ngOnInit(): void {
+    this.producto = this.productos.find((producto) => producto.id === 1);
+    if (this.producto) {
+      this.formulario.patchValue({
+        id: this.producto.id,
+        precio: this.producto.precio
+      });
+    }
+  }
+
   constructor(private fb: FormBuilder) {
     this.formulario = this.fb.group({
       id: [''], // Campo oculto
@@ -84,9 +95,18 @@ export class AlquilarProductoComponent {
   }
 
   onSubmit() {
+    var $error = document.getElementById('error');
     if (this.formulario.valid) {
+      if ($error != null) {
+        $error.style.display = "none";
+      }
       console.log('Formulario válido', this.formulario.value);
     } else {
+
+      if ($error != null) {
+        $error.style.display = "block";
+      }
+
       console.log('Formulario inválido');
     }
   }

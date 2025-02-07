@@ -15,10 +15,16 @@ export interface Producto {
   providedIn: 'root'
 })
 export class ApiService {
-  private apiUrl = 'http://localhost:9090/productos/obtener'; // URL de la API de Spring Boot
+  private apiUrl = 'http://localhost:9090/'; // URL de la API de Spring Boot
 
   constructor(private http: HttpClient) { }
   getSaludo(): Observable<Producto[]> {
-    return this.http.get<Producto[]>(this.apiUrl);
+    return this.http.get<Producto[]>(this.apiUrl + "productos/obtener");
   }
+
+  login(email: string, contrasena: string): Observable<any> {
+    const body = { email, contrasena };
+    return this.http.post(this.apiUrl + "usuario/autentica", body);
+  }
+
 }
