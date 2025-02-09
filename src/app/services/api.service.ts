@@ -27,4 +27,8 @@ export class ApiService {
     return this.http.post(this.apiUrl + "usuario/autentica", body);
   }
 
+  getMisProductos(id_usuario: number){
+    return this.http.post(this.apiUrl + "alquileres/misProductos", id_usuario);
+  }
+
 }
