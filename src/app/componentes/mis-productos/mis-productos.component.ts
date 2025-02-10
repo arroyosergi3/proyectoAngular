@@ -11,6 +11,13 @@ export interface Producto {
   marca: string;
   ruta: string;
 }
+export interface Alquiler {
+  id: number;
+  producto: Producto;
+  fecha_inicio: Date;
+  fecha_fin: Date;
+}
+
 @Component({
   selector: 'app-mis-productos',
   imports: [CommonModule, RouterLink],
@@ -18,18 +25,32 @@ export interface Producto {
   styleUrl: './mis-productos.component.css'
 })
 export class MisProductosComponent {
-  idUsuario: string = '';
-
-    misProductos: Producto[] = []
+     misAlquileres: Alquiler[] = []
     constructor(private apiservice: ApiService) { }
+    /*
     ngOnInit() {
-      this.apiservice.getMisProductos(this.idUsuario).subscribe(
+      this.apiservice.getMisProductos().subscribe(
         (data) => {
-          this.misProductos = data;
+          this.misAlquileres = data;
+          console.log("ALQUILERES MIOS:",this.misAlquileres);
         },
         (error) => {
           console.log('Error al obtener los productos:', error);
         }
       );
     }
+      */
+    ngOnInit() {
+      this.apiservice.getMisProductos().subscribe(
+        (alquileres) => {
+          this.misAlquileres = alquileres;
+          console.log("ALQUILERES MIOS:",this.misAlquileres);
+        },
+        (error) => {
+          console.log('Error al obtener los alquileres:', error);
+        }
+      );
+    }
+
+
 }
