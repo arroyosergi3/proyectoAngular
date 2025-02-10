@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 export interface Producto {
@@ -27,8 +27,13 @@ export class ApiService {
     return this.http.post(this.apiUrl + "usuario/autentica", body);
   }
 
-  getMisProductos(id_usuario: number){
+
+  getMisProductos(id_usuario: string): Observable<any> {
     return this.http.post(this.apiUrl + "alquileres/misProductos", id_usuario);
   }
 
+  // Método para obtener el id_usuario desde la sesión
+  getUserIdFromSession(): Observable<string> {
+    return this.http.get<string>(`${this.apiUrl}/getUserId`);
+  }
 }

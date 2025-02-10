@@ -18,19 +18,18 @@ export interface Producto {
   styleUrl: './mis-productos.component.css'
 })
 export class MisProductosComponent {
+  idUsuario: string = '';
 
-
-    productosJson: Producto[] = []
+    misProductos: Producto[] = []
     constructor(private apiservice: ApiService) { }
     ngOnInit() {
-      this.apiservice.getSaludo().subscribe(
+      this.apiservice.getMisProductos(this.idUsuario).subscribe(
         (data) => {
-          this.productosJson = data;  // Asignamos los productos obtenidos de la API
+          this.misProductos = data;
         },
         (error) => {
           console.log('Error al obtener los productos:', error);
         }
       );
     }
-
 }

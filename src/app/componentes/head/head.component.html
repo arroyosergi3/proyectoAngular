@@ -25,8 +25,9 @@
     <!-- Botón de Login a mio la derecha -->
     <button class="btn btn-primary me-5 g btn-m" *ngIf="!isAuthenticated;" onclick="window.location.href = 'login'" >Login</button>
 
-    <button class="btn btn-primary me-5 g btn-m" *ngIf="isAuthenticated"  onclick="window.location.href = ''">Mis Productos Alquilados</button>
-    <!-- Botón de gestion a la derecha -->
+  <button type="submit" class="btn btn-primary me-5 g btn-m" *ngIf="isAuthenticated"  onclick="window.location.href = 'misProductos'">Mis Productos Alquilados</button>
+
+      <!-- Botón de gestion a la derecha -->
     <button class="btn btn-primary me-5 g d-none ">Gestión Articulos</button>
   </div>
 </nav>
