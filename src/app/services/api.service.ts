@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Alquiler } from '../componentes/mis-productos/mis-productos.component';
 export interface Producto {
   id: number;
   nombre: string;
@@ -35,21 +36,21 @@ export class ApiService {
 
   getIdUsuario(): number | null {
     const id = localStorage.getItem('id_usuario');
-    console.log("EL ID DEL USUARIO ES: ", id);
+   // console.log("EL ID DEL USUARIO ES: ", id);
     return id ? parseInt(id, 10) : null;
 
   }
 
   // Obtener el rol del usuario autenticado desde localStorage
   getRolUsuario(): string | null {
-    console.log("EL ROL DEL USUARIO ES ", localStorage.getItem('rol'));
+    //console.log("EL ROL DEL USUARIO ES ", localStorage.getItem('rol'));
     return localStorage.getItem('rol');
   }
 
   getMisProductos(): Observable<any> {
     const idUsuario = this.getIdUsuario();
     if (!idUsuario) return new Observable(); // Retorna vacío si no hay usuario
-    return this.http.post(this.apiUrl + "alquileres/misProductos", { id_usuario: idUsuario });
+    return this.http.post<Alquiler[]>(this.apiUrl + "alquileres/misProductos", { id_usuario: idUsuario });
   }
   // Método para obtener el id_usuario desde la sesión
   getUserIdFromSession(): Observable<string> {
@@ -57,7 +58,7 @@ export class ApiService {
   }
 
   getProductoById(id: number): Observable<Producto> {
-    return this.http.get<Producto>(`URL_DEL_BACKEND/productos/${id}`);
+    return this.http.post<Producto>(this.apiUrl+'/productos/obtenerPorId', id);
   }
 
 }

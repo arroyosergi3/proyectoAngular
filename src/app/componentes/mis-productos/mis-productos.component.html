@@ -12,15 +12,57 @@
                 <th scope="col">Fecha de Inicio</th>
                 <th scope="col">Fecha de Fin</th>
               </tr>
-              <tr *ngFor="let alguiler of misAlquileres">
-                <td>{{alguiler.producto}}</td>
-                <td>{{alguiler.fecha_inicio}}</td>
-                <td>{{alguiler.fecha_fin}}</td>
+              <tr *ngFor="let alquiler of misAlquileres">
+                <td *ngIf="productos?.length">
+                  <ng-container *ngFor="let producto of productos">
+                    <ng-container *ngIf="alquiler?.id_producto && producto?.id && alquiler.id_producto === producto.id">
+                      {{ producto.nombre }}
+                    </ng-container>
+                  </ng-container>
+                </td>
 
+                <td>{{ alquiler?.fecha_inicio }}</td>
+                <td>{{ alquiler?.fecha_fin }}</td>
               </tr>
+
             </thead>
           </table>
 
         </div>
+
+
+
+
+        <!-- LOS VENCIDOS -->
+        <h1 class="mb-4 text-center">Alquileres Pasados</h1>
+
+        <!-- Row de toda la pagina-->
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+            <!-- Row de productos-->
+
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Producto</th>
+                      <th scope="col">Fecha de Inicio</th>
+                      <th scope="col">Fecha de Fin</th>
+                    </tr>
+                    <tr *ngFor="let alquiler of alquileresPasados">
+                      <td *ngIf="productos?.length">
+                        <ng-container *ngFor="let producto of productos">
+                          <ng-container *ngIf="alquiler?.id_producto && producto?.id && alquiler.id_producto === producto.id">
+                            {{ producto.nombre }}
+                          </ng-container>
+                        </ng-container>
+                      </td>
+
+                      <td>{{ alquiler?.fecha_inicio }}</td>
+                      <td>{{ alquiler?.fecha_fin }}</td>
+                    </tr>
+
+                  </thead>
+                </table>
+
+              </div>
 
     </div>

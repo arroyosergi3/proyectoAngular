@@ -13,9 +13,9 @@ export interface Producto {
 }
 export interface Alquiler {
   id: number;
-  producto: Producto;
-  fecha_inicio: Date;
-  fecha_fin: Date;
+  id_producto: number;
+  fecha_inicio: string;
+  fecha_fin: string;
 }
 
 @Component({
@@ -25,7 +25,9 @@ export interface Alquiler {
   styleUrl: './mis-productos.component.css'
 })
 export class MisProductosComponent {
-     misAlquileres: Alquiler[] = []
+  misAlquileres: Alquiler[] = []
+  alquileresPasados: Alquiler[] = []
+  productos: Producto[] = []
     constructor(private apiservice: ApiService) { }
     /*
     ngOnInit() {
@@ -42,12 +44,42 @@ export class MisProductosComponent {
       */
     ngOnInit() {
       this.apiservice.getMisProductos().subscribe(
-        (alquileres) => {
-          this.misAlquileres = alquileres;
-          console.log("ALQUILERES MIOS:",this.misAlquileres);
+        (alquileres : Alquiler[]) => {
+
+          const hoy = new Date();
+      hoy.setHours(0, 0, 0, 0); // Eliminar horas
+
+      //console.log("FECHA DE HOY: ", hoy);
+
+      // Filtrar alquileres activos y vencidos correctamente
+      this.misAlquileres = alquileres.filter((alquiler) => {
+        const fechaFin = new Date(alquiler.fecha_fin);
+       // console.log("FECHA DE FIN: ", fechaFin);
+        return fechaFin >= hoy && alquiler.fecha_fin;  // Verifica que 'fecha_fin' exista
+      });
+
+      this.alquileresPasados = alquileres.filter((alquiler) => {
+        const fechaFin = new Date(alquiler.fecha_fin);
+        return fechaFin < hoy && alquiler.fecha_fin;
+      });
+
+         // console.log("ALQUILERES MIOS EN VIGOR: ",this.misAlquileres);
+          //console.log("ALQUILERES PASADOS: ",this.alquileresPasados);
+
         },
         (error) => {
           console.log('Error al obtener los alquileres:', error);
+        }
+      );
+      this.apiservice.getSaludo().subscribe(
+        (data) => {
+          this.productos = data;  // Asignamos los productos obtenidos de la API
+
+
+          //console.log("TODOS PRODUCTOS:",this.productos);
+        },
+        (error) => {
+          console.log('Error al obtener los productos:', error);
         }
       );
     }
