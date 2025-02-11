@@ -21,11 +21,13 @@ export interface Producto {
 })
 export class PrincipalComponent implements OnInit {
 
-
+  rol = '';
+  constructor(private apiservice: ApiService) { }
   productosJson: Producto[] = [];
   marcas: Marca[] =[] ;
-  constructor(private apiservice: ApiService) { }
   ngOnInit() {
+    this.rol = this.apiservice.getRolUsuario();
+
     this.apiservice.getSaludo().subscribe(
       (data) => {
         this.productosJson = data;  // Asignamos los productos obtenidos de la API
@@ -33,6 +35,7 @@ export class PrincipalComponent implements OnInit {
       (error) => {
         console.log('Error al obtener los productos:', error);
       }
+
     );
 
     this.apiservice.getMarcas().subscribe(
@@ -44,7 +47,7 @@ export class PrincipalComponent implements OnInit {
         console.log('Error al obtener los productos:', error);
       }
     );
-
+     console.log("EL ROL DEL USUARIO ES: ", this.rol);
   }
 
 }

@@ -75,13 +75,12 @@ export class MisProductosComponent {
         (data) => {
           this.productos = data;  // Asignamos los productos obtenidos de la API
 
-
-          //console.log("TODOS PRODUCTOS:",this.productos);
         },
         (error) => {
           console.log('Error al obtener los productos:', error);
         }
       );
+
     }
 
 

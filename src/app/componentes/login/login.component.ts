@@ -31,7 +31,7 @@ export class LoginComponent {
           alert("Credenciales Incorrectas");
         }
         if (response.result === 'nullUser') {
-
+          alert("Si, tet eiene que redirigir, y con tu email "+ this.email);
           this.router.navigate(['/register/'+this.email]);
         }
       },

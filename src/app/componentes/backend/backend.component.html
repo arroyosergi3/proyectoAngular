@@ -1,0 +1,128 @@
+<div class="container py-5">
+  <h1 class="mb-4 text-center">BACKEND</h1>
+
+  <button class="btn btn-mo mx-2" (click)="mostrarTabla('productos')"> Mostar Productos </button>
+  <button class="btn btn-mo mx-2 " (click)="mostrarTabla('usuarios')"> Mostar Usuarios </button>
+  <button class="btn btn-mo  mx-2" (click)="mostrarTabla('alquileres')"> Mostar Alquileres </button>
+  <button class="btn btn-mo  mx-2" (click)="mostrarTabla('marcas')"> Mostar Marcas </button>
+  <!-- Row de toda la pagina-->
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+
+          <!-- TABLA DE PRODUCTOS -->
+          <table class="table table-striped d-none my-4" #tablaProductos title="Tabla de Productos">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col">Id_marca</th>
+                <th scope="col">Ruta</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Borrar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let producto of productos">
+                <td>{{ producto.id }}</td>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.precio }}</td>
+                <td>{{ producto.estado }}</td>
+                <td>{{ producto.descripcion }}</td>
+                <td>{{ producto.marca }}</td>
+                <td>{{ producto.ruta }}</td>
+                <td><a href=""><button class="btn btn-primary">Editar</button></a></td>
+                <td><a href=""><button class="btn btn-danger">Borrar</button></a></td>
+              </tr>
+            </tbody>
+
+          </table>
+
+
+<!-- TABLA DE USUARIOS -->
+<table class="table table-striped d-none my-4" #tablaUsuarios title="Tabla de Productos">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Apellido</th>
+      <th scope="col">Email</th>
+      <th scope="col">Rol</th>
+      <th scope="col">Contraseña</th>
+      <th scope="col">Pais</th>
+      <th scope="col">Sexo</th>
+      <th scope="col">Editar</th>
+      <th scope="col">Borrar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let usuario of usuarios">
+      <td>{{ usuario.id }}</td>
+      <td>{{ usuario.nombre }}</td>
+      <td>{{ usuario.apellido }}</td>
+      <td>{{ usuario.email }}</td>
+      <td>{{ usuario.rol }}</td>
+      <td>{{ usuario.contrasena }}</td>
+      <td>{{ usuario.pais }}</td>
+      <td>{{ usuario.sexo }}</td>
+      <td><a href=""><button class="btn btn-primary">Editar</button></a></td>
+      <td><a href=""><button class="btn btn-danger">Borrar</button></a></td>
+    </tr>
+  </tbody>
+
+</table>
+
+
+<!-- TABLA DE ALQUILERES -->
+<table class="table table-striped d-none my-4" #tablaAlquileres title="Tabla de Productos">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">ID_Usuario</th>
+      <th scope="col">ID_Producto</th>
+      <th scope="col">Fecha de Inicio</th>
+      <th scope="col">Fecha de Fin</th>
+      <th scope="col">Editar</th>
+      <th scope="col">Borrar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let alquiler of alquileres">
+      <td>{{ alquiler.id }}</td>
+      <td>{{ alquiler.id_usuario }}</td>
+      <td>{{ alquiler.id_producto }}</td>
+      <td>{{ alquiler.fecha_inicio }}</td>
+      <td>{{ alquiler.fecha_fin }}</td>
+      <td><a href=""><button class="btn btn-primary">Editar</button></a></td>
+      <td><a href=""><button class="btn btn-danger">Borrar</button></a></td>
+    </tr>
+  </tbody>
+
+</table>
+
+
+
+<!-- TABLA DE MARCAS -->
+<table class="table table-striped d-none my-4" #tablaMarcas title="Tabla de Productos">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Editar</th>
+      <th scope="col">Borrar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let marca of marcas">
+      <td>{{ marca.id }}</td>
+      <td>{{ marca.nombre }}</td>
+      <td><a href=""><button class="btn btn-primary">Editar</button></a></td>
+      <td><a href=""><button class="btn btn-danger">Borrar</button></a></td>
+    </tr>
+  </tbody>
+
+</table>
+
+
+</div>

@@ -1,7 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Alquiler } from '../componentes/mis-productos/mis-productos.component';
 import { Router, RouterLink } from '@angular/router';
 export interface Producto {
   id: number;
@@ -12,10 +11,26 @@ export interface Producto {
   marca: string;
   ruta: string;
 }
-
+export interface Usuario{
+  id: number;
+  nombre: string;
+  apellido: string;
+  email: string;
+  rol: string;
+  contrasena: string;
+  pais: string;
+  sexo: string;
+}
 export interface Marca {
   id: string;
   nombre: string;
+}
+export interface Alquiler {
+  id: number;
+  id_producto: number;
+  id_usuario: string;
+  fecha_inicio: string;
+  fecha_fin: string;
 }
 
 @Injectable({
@@ -33,6 +48,12 @@ export class ApiService {
 
   getMarcas(): Observable<Marca[]> {
     return this.http.get<Marca[]>(this.apiUrl + "marcas/obtener");
+  }
+  getAlquileres(): Observable<Alquiler[]> {
+    return this.http.get<Alquiler[]>(this.apiUrl + "alquiler/obtener");
+  }
+  getUsuarios(): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(this.apiUrl + "usuario/obtener");
   }
 
   login(email: string, contrasena: string): Observable<any> {
@@ -59,9 +80,13 @@ export class ApiService {
   }
 
   // Obtener el rol del usuario autenticado desde localStorage
-  getRolUsuario(): string | null {
-    //console.log("EL ROL DEL USUARIO ES ", localStorage.getItem('rol'));
-    return localStorage.getItem('rol');
+  getRolUsuario(): string  {
+   var rol = localStorage.getItem('rol');
+    if (rol) {
+      return rol;
+    }else{
+      return 'ROL INVALIDO';
+    }
   }
 
   getMisProductos(): Observable<any> {
@@ -86,6 +111,14 @@ export class ApiService {
     }
   }
 
+  isAdmin(): boolean {
+    let rol = localStorage.getItem('rol');
+    if (rol === 'admin') {
+      return true;
+    }else{
+      return false;
+    }
+  }
   cookieExists(cookieName: string): boolean {
     const cookies = document.cookie;
     const cookieArray = cookies.split(';');
@@ -102,11 +135,12 @@ export class ApiService {
   logOut() {
     localStorage.removeItem('id_usuario');
     localStorage.removeItem('rol');
+    this.setUsuario(0, "");
     this.deleteCookie('jwt');
     alert("Sesion cerrada");
     setTimeout(() => {
       this.router.navigate(['/']); // Redirige a la ruta principal
-    }, 1000); // 3000 ms = 3 segundos
+    }, 1000);
   }
 
   deleteCookie(name: string): void {
