@@ -111,14 +111,6 @@ export class ApiService {
     }
   }
 
-  isAdmin(): boolean {
-    let rol = localStorage.getItem('rol');
-    if (rol === 'admin') {
-      return true;
-    }else{
-      return false;
-    }
-  }
   cookieExists(cookieName: string): boolean {
     const cookies = document.cookie;
     const cookieArray = cookies.split(';');
@@ -131,6 +123,14 @@ export class ApiService {
     return false;
 }
 
+isAdmin(): boolean {
+  let rol = localStorage.getItem('rol');
+  if (rol === 'admin') {
+    return true;
+  }else{
+    return false;
+  }
+}
 
   logOut() {
     localStorage.removeItem('id_usuario');
