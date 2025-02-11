@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component  } from '@angular/core';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-head',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './head.component.html',
   styleUrl: './head.component.css'
@@ -11,7 +13,7 @@ export class HeadComponent {
 
   isAuthenticated = false;
 
-  constructor() { }
+  constructor(private apiService : ApiService) { }
 
   getCookie(name: string) {
     const nameLenPlus = (name.length + 1);
@@ -28,6 +30,11 @@ export class HeadComponent {
     if(jwt){
       this.isAuthenticated = true;
     }
+  }
+
+  onLogout(){
+    this.isAuthenticated = false;
+    this.apiService.logOut();
   }
 
 

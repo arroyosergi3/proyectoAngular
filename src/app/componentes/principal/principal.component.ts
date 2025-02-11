@@ -1,4 +1,4 @@
-import { ApiService } from './../../services/api.service';
+import { ApiService, Marca } from './../../services/api.service';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -14,6 +14,7 @@ export interface Producto {
 
 @Component({
   selector: 'app-principal',
+  standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './principal.component.html',
   styleUrl: './principal.component.css'
@@ -21,7 +22,8 @@ export interface Producto {
 export class PrincipalComponent implements OnInit {
 
 
-  productosJson: Producto[] = []
+  productosJson: Producto[] = [];
+  marcas: Marca[] =[] ;
   constructor(private apiservice: ApiService) { }
   ngOnInit() {
     this.apiservice.getSaludo().subscribe(
@@ -32,6 +34,17 @@ export class PrincipalComponent implements OnInit {
         console.log('Error al obtener los productos:', error);
       }
     );
+
+    this.apiservice.getMarcas().subscribe(
+      (data) => {
+        this.marcas = data;
+        console.log(this.marcas);
+      },
+      (error) => {
+        console.log('Error al obtener los productos:', error);
+      }
+    );
+
   }
 
 }

@@ -13,6 +13,7 @@ export interface Producto {
 }
 @Component({
   selector: 'app-detalle',
+  standalone: true,
   imports: [AlquilarProductoComponent],
   templateUrl: './detalle.component.html',
   styleUrl: './detalle.component.css'

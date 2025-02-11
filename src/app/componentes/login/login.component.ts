@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
+  standalone: true,
   imports: [FormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
@@ -12,24 +13,26 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   email: string = '';
   contrasena: string = '';
-  constructor(private apiService: ApiService, private router: Router) {}
+  constructor(private apiService: ApiService, private router: Router) { }
 
   onSubmit() {
     this.apiService.login(this.email, this.contrasena).subscribe(
       (response) => {
-        console.log(response.id_usuario.toString()); // ⚠ Error aquí si `response` es undefined
         if (response.result === 'ok') {
           const idUsuario = response.id_usuario;
-      const rol = response.rol;
-      if (idUsuario && rol) {
-        this.apiService.setUsuario(idUsuario, rol);
-      }else{
-      }
+          const rol = response.rol;
+          if (idUsuario && rol) {
+            this.apiService.setUsuario(idUsuario, rol);
+          }
           document.cookie = `jwt=${response.jwt}; path=/`;
-          //alert('Las credenciales si tan bien');
           this.router.navigate(['/misProductos']); // Redirige tras login exitoso
-        } else {
-          alert('Credenciales incorrectas');
+        }
+        if(response.email != null){
+          alert("Credenciales Incorrectas");
+        }
+        if (response.result === 'nullUser') {
+
+          this.router.navigate(['/register/'+this.email]);
         }
       },
       (error) => {

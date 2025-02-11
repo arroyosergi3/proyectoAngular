@@ -1,7 +1,7 @@
 <nav class="py-4 navbar navbar-expand-lg bg-m g">
   <div class="container-fluid ">
     <!-- Logo a la izquierda -->
-    <a class="navbar-brand ms-5" >
+    <a class="navbar-brand ms-5" onclick="window.location.href = '/'">
       <img
         src="logo.png"
         alt=""
@@ -23,9 +23,11 @@
     </form>
 
     <!-- Botón de Login a mio la derecha -->
-    <button class="btn btn-primary me-5 g btn-m" *ngIf="!isAuthenticated;" onclick="window.location.href = 'login'" >Login</button>
+    <button class="mx-2 btn btn-primary me-5 g btn-m" *ngIf="!isAuthenticated;" onclick="window.location.href = 'login'" >Login</button>
 
-  <button type="submit" class="btn btn-primary me-5 g btn-m" *ngIf="isAuthenticated"  onclick="window.location.href = 'misProductos'">Mis Productos Alquilados</button>
+    <button type="submit" class="mx-2 btn btn-primary me-5 g btn-m" *ngIf="isAuthenticated"  onclick="window.location.href = 'misProductos'">Mis Productos Alquilados</button>
+
+    <button type="submit" class="mx-2 btn btn-primary me-5 g btn-m " *ngIf="isAuthenticated" (click)="onLogout()">Cerrar Sesion</button>
 
       <!-- Botón de gestion a la derecha -->
     <button class="btn btn-primary me-5 g d-none ">Gestión Articulos</button>

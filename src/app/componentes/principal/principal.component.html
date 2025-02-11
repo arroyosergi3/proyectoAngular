@@ -16,7 +16,15 @@
           <div class="card-body">
             <h4 class="card-title">{{ producto.nombre }}</h4>
             <h5 class="card-text">{{ producto.precio }}€</h5>
-            <h6 class="card-text">{{ producto.marca }}</h6>
+            <!-- Correcto: Usa ng-container y las directivas directamente -->
+<ng-container *ngFor="let marca of marcas">
+  <h6 *ngIf="marca.id === producto.marca">
+    {{ marca.nombre }}
+  </h6>
+</ng-container>
+
+
+
             <a href="#" [routerLink]="['/detalle', producto.id]"  class="btn btn-mo">Ver más</a>
           </div>
         </div>

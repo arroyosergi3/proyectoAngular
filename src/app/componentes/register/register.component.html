@@ -1,0 +1,59 @@
+<div class="container mt-5">
+  <div class="p-4 shadow-sm card">
+    <h2 class="mb-4 text-center">Registro</h2>
+    <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre:</label>
+        <input type="text" id="nombre" class="form-control" [(ngModel)]="nombre" name="nombre" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="apellido" class="form-label">Apellido:</label>
+        <input type="text" id="apellido" class="form-control" [(ngModel)]="apellido" name="apellido" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label">Email:</label>
+        <input type="email" id="email" class="form-control"  [(ngModel)]="email" name="email" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="contrasena" class="form-label">Contraseña:</label>
+        <input type="password" id="contrasena" class="form-control" [(ngModel)]="contrasena" name="contrasena" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="contrasena2" class="form-label">Repetir Contraseña:</label>
+        <input type="password" id="contrasena2" class="form-control" [(ngModel)]="contrasena2" name="contrasena2" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Sexo:</label>
+        <select class="form-select" [(ngModel)]="sexo" name="sexo" required>
+          <option value="">Selecciona...</option>
+          <option value="Masculino">Masculino</option>
+          <option value="Femenino">Femenino</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">País:</label>
+        <select class="form-select" [(ngModel)]="pais" name="pais" required>
+          <option value="">Selecciona...</option>
+          <option value="España">España</option>
+          <option value="Alemania">Alemania</option>
+          <option value="Francia">Francia</option>
+          <option value="Italia">Italia</option>
+          <option value="Inglaterra">Inglaterra</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-mo w-100" [disabled]="registerForm.invalid">Registrarse</button>
+    </form>
+
+    <p *ngIf="errorMessage" class="mt-3 text-center text-danger">{{ errorMessage }}</p>
+    <p *ngIf="successMessage" class="mt-3 text-center text-success">{{ successMessage }}</p>
+  </div>
+</div>

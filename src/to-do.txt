@@ -1,4 +1,3 @@
-- Crear Usuario (si al hacer el login no encuentra usuario, llevar a formulario de registro)
 - CRUD de usuarios(SOLO SI ES ADMIN)
 - Mostrar en principal solo si el estado es false
 -Mostar el precio total, darle a alquilar y cambiar el estado del producto
