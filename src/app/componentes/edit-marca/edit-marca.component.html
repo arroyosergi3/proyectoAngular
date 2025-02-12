@@ -1,1 +1,18 @@
-<p>edit-marca works!</p>
+<h1 class="text-center">Edit de la Marca</h1>
+<div class="container my-5 d-flex justify-content-center align-items-center vh-100">
+    <div class="p-4 shadow card" style="width: 350px;">
+        <h3 class="mb-4 text-center">Iniciar Sesión</h3>
+        <form (ngSubmit)="onSubmit()" method="POST">
+            <div class="mb-3">
+                <label for="id" class="form-label">ID</label>
+                <input type="number" name="id" class="form-control" id="id" [(ngModel)]="id">
+            </div>
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" name="nombre" class="form-control" id="nombre"  [(ngModel)]="nombre" required>
+            </div>
+            <button type="submit" class="btn btn-mo w-100" >Guardar</button>
+            <button type="button" class="mt-3 btn btn-warning w-100" onclick="window.location.href = 'backend'" >Cancelar</button>
+        </form>
+    </div>
+  </div>

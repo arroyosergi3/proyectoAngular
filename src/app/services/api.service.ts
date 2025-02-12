@@ -88,9 +88,7 @@ export class ApiService {
   }
 
   getIdUsuario(): number | null {
-
     const id = localStorage.getItem('id_usuario');
-    // console.log("EL ID DEL USUARIO ES: ", id);
     return id ? parseInt(id, 10) : null;
 
   }
@@ -162,4 +160,22 @@ isAdmin(): boolean {
   deleteCookie(name: string): void {
     document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
   }
+
+  updateMarca(id: string, nombre:string){
+    const body = { id, nombre };
+    return this.http.post<any>(this.apiUrl + "marcas/actualizar", body);
+  }
+  updateUsuario(id: string, nombre:string){
+    const body = { id, nombre };
+    return this.http.post<any>(this.apiUrl + "usuarios/actualizar", body);
+  }
+  updateProducto(id: string, nombre:string, precio:number, estado:boolean, descripcion:string, marca:string,ruta:string,){
+    const body = { id, nombre, precio, estado, descripcion, marca, ruta };
+    return this.http.post<any>(this.apiUrl + "productos/actualizar", body);
+  }
+  updateAlquiler(id: string, nombre:string){
+    const body = { id, nombre };
+    return this.http.post<any>(this.apiUrl + "alquiler/actualizar", body);
+  }
+
 }

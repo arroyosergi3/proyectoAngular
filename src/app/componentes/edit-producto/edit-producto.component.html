@@ -1,0 +1,41 @@
+<h1 class="text-center">Editar Producto</h1>
+<div class="container my-5 d-flex justify-content-center align-items-center vh-100">
+    <div class="p-4 shadow card" style="width: 350px;">
+        <h3 class="mb-4 text-center">Editar Producto</h3>
+        <form (ngSubmit)="onSubmit()" method="POST">
+            <div class="mb-3">
+                <label for="id" class="form-label">ID</label>
+                <input type="number" name="id" class="form-control" id="id" [(ngModel)]="id" required>
+            </div>
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" name="nombre" class="form-control" id="nombre" [(ngModel)]="nombre" required>
+            </div>
+            <div class="mb-3">
+                <label for="descripcion" class="form-label">Descripción</label>
+                <input type="text" name="descripcion" class="form-control" id="descripcion" [(ngModel)]="descripcion" required>
+            </div>
+            <div class="mb-3">
+                <label for="precio" class="form-label">Precio</label>
+                <input type="number" name="precio" class="form-control" id="precio" [(ngModel)]="precio" required>
+            </div>
+            <div class="mb-3">
+                <label for="estado" class="form-label">Estado</label>
+                <select class="form-control" id="estado" name="estado" [(ngModel)]="estado" required>
+                    <option value="1">Activo</option>
+                    <option value="0">Inactivo</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="marca" class="form-label">Marca ID</label>
+                <input type="number" name="marca" class="form-control" id="marca" [(ngModel)]="id_marca" required>
+            </div>
+            <div class="mb-3">
+                <label for="ruta" class="form-label">Ruta de Imagen</label>
+                <input type="text" name="ruta" class="form-control" id="ruta" [(ngModel)]="ruta" required>
+            </div>
+            <button type="submit" class="btn btn-mo w-100">Guardar</button>
+            <button type="button" class="mt-3 btn btn-warning w-100" onclick="window.location.href = 'backend'">Cancelar</button>
+        </form>
+    </div>
+</div>

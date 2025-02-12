@@ -44,7 +44,7 @@
           <td>{{ producto.marca }}</td>
           <td>{{ producto.ruta }}</td>
           <td>
-            <a href=""><button class="btn btn-primary">Editar</button></a>
+            <a href=""><button class="btn btn-primary" [routerLink]="['/editProducto', producto.id]">Editar</button></a>
           </td>
           <td>
             <button

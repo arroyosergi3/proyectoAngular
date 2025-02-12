@@ -9,6 +9,7 @@ import { authGuard } from './guards/auth.guard';
 import { BackendComponent } from './componentes/backend/backend.component';
 import { adminGuard } from './guards/admin.guard';
 import { EditMarcaComponent } from './componentes/edit-marca/edit-marca.component';
+import { EditProductoComponent } from './componentes/edit-producto/edit-producto.component';
 
 export const routes: Routes = [
   {path: '',component: PrincipalComponent},
@@ -17,5 +18,6 @@ export const routes: Routes = [
   {path: 'register/:email',component: RegisterComponent},
   {path: 'misProductos',component: MisProductosComponent, canActivate: [authGuard]},
   { path: 'detalle/:id', component: DetalleComponent },
-  { path: 'editMarca/:id', component: EditMarcaComponent }
+  { path: 'editMarca/:id', component: EditMarcaComponent },
+  { path: 'editProducto/:id', component: EditProductoComponent }
 ];
