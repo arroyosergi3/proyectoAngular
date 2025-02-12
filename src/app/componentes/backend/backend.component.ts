@@ -30,11 +30,12 @@ export interface Usuario{
 }
 
 export interface Marca{
-  id: string;
+  id: number;
   nombre: string;
 }
 @Component({
   selector: 'app-backend',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './backend.component.html',
   styleUrl: './backend.component.css'
@@ -62,18 +63,18 @@ export class BackendComponent implements OnInit{
         console.log('Error al obtener los productos:', error);
       }
     );
-    /*
+
     //Obtener alquiler
     this.apiservice.getAlquileres().subscribe(
       (data) => {
-        this.alquiler = data;  // Asignamos los productos obtenidos de la API
+        this.alquileres = data;  // Asignamos los productos obtenidos de la API
 
       },
       (error) => {
         console.log('Error al obtener los productos:', error);
       }
     );
-    */
+
     //Obtener usuarios
     this.apiservice.getUsuarios().subscribe(
       (data) => {
@@ -95,7 +96,7 @@ export class BackendComponent implements OnInit{
       }
     );
   }
-  @ViewChild('tablaProductos') tablaProductos!: ElementRef;
+@ViewChild('tablaProductos') tablaProductos!: ElementRef;
 @ViewChild('tablaUsuarios') tablaUsuarios!: ElementRef;
 @ViewChild('tablaAlquileres') tablaAlquileres!: ElementRef;
 @ViewChild('tablaMarcas') tablaMarcas!: ElementRef;
@@ -127,6 +128,55 @@ mostrarTabla(tipo: string) {
     this.tablaUsuarios.nativeElement.classList.add('d-none');
     this.tablaAlquileres.nativeElement.classList.add('d-none');
   }
+}
+
+borrarUsuario(id: number){
+this.apiservice.borrarUsuario(id).subscribe(
+  (response) => {
+    if (response.borrado === 'success') {
+      alert("USUARIO BORRADO CON EXITO");
+    }
+    if (response.borrado === 'fail') {
+      alert("USUARIO NO BORRADO");
+    }
+  },
+)
+}
+borrarProducto(id: number){
+this.apiservice.borrarProducto(id).subscribe(
+  (response) => {
+    if (response.borrado === 'success') {
+      alert("PRODUCTO BORRADO CON EXITO");
+    }
+    if (response.borrado === 'fail') {
+      alert("PRODUCTO NO BORRADO");
+    }
+  },
+)
+}
+borrarMarca(id: number){
+this.apiservice.borrarMarca(id).subscribe(
+  (response) => {
+    if (response.borrado === 'success') {
+      alert("MARCA BORRADA CON EXITO");
+    }
+    if (response.borrado === 'fail') {
+      alert("MARCA NO BORRADA");
+    }
+  },
+)
+}
+borrarAlquiler(id: number){
+this.apiservice.borrarAlquiler(id).subscribe(
+  (response) => {
+    if (response.borrado === 'success') {
+      alert("ALQUILER BORRADO CON EXITO");
+    }
+    if (response.borrado === 'fail') {
+      alert("ALQUILER NO BORRADO");
+    }
+  },
+)
 }
 }
 

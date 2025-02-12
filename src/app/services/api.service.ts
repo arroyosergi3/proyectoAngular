@@ -22,7 +22,7 @@ export interface Usuario{
   sexo: string;
 }
 export interface Marca {
-  id: string;
+  id: number;
   nombre: string;
 }
 export interface Alquiler {
@@ -54,6 +54,22 @@ export class ApiService {
   }
   getUsuarios(): Observable<Usuario[]> {
     return this.http.get<Usuario[]>(this.apiUrl + "usuario/obtener");
+  }
+  borrarUsuario(id: number): Observable<any> {
+    const body = { id: id }; // Envía un objeto JSON con la propiedad "id"
+    return this.http.post(this.apiUrl + "usuario/borrar1", body);
+  }
+  borrarProducto(id: number): Observable<any> {
+    const body = { id: id }; // Envía un objeto JSON con la propiedad "id"
+    return this.http.post(this.apiUrl + "productos/borrar1", body);
+  }
+  borrarMarca(id: number): Observable<any> {
+    const body = { id: id }; // Envía un objeto JSON con la propiedad "id"
+    return this.http.post(this.apiUrl + "marcas/borrar1", body);
+  }
+  borrarAlquiler(id: number): Observable<any> {
+    const body = { id: id }; // Envía un objeto JSON con la propiedad "id"
+    return this.http.post(this.apiUrl + "alquiler/borrar1", body);
   }
 
   login(email: string, contrasena: string): Observable<any> {
