@@ -3,7 +3,7 @@ import { ApiService } from '../../services/api.service';
 import { CommonModule } from '@angular/common';
 
 export interface Producto {
-  id: number;
+  id: string;
   nombre: string;
   precio: number;
   estado: boolean;
@@ -12,14 +12,14 @@ export interface Producto {
   ruta: string;
 }
 export interface Alquiler {
-  id: number;
+  id: string;
   id_producto: number;
   id_usuario : string;
   fecha_inicio: string;
   fecha_fin: string;
 }
 export interface Usuario{
-  id: number;
+  id: string;
   nombre: string;
   apellido: string;
   email: string;
@@ -30,7 +30,7 @@ export interface Usuario{
 }
 
 export interface Marca{
-  id: number;
+  id: string;
   nombre: string;
 }
 @Component({
@@ -130,7 +130,7 @@ mostrarTabla(tipo: string) {
   }
 }
 
-borrarUsuario(id: number){
+borrarUsuario(id: string){
 this.apiservice.borrarUsuario(id).subscribe(
   (response) => {
     if (response.borrado === 'success') {
@@ -142,7 +142,7 @@ this.apiservice.borrarUsuario(id).subscribe(
   },
 )
 }
-borrarProducto(id: number){
+borrarProducto(id: string){
 this.apiservice.borrarProducto(id).subscribe(
   (response) => {
     if (response.borrado === 'success') {
@@ -154,7 +154,7 @@ this.apiservice.borrarProducto(id).subscribe(
   },
 )
 }
-borrarMarca(id: number){
+borrarMarca(id: string){
 this.apiservice.borrarMarca(id).subscribe(
   (response) => {
     if (response.borrado === 'success') {
@@ -166,7 +166,7 @@ this.apiservice.borrarMarca(id).subscribe(
   },
 )
 }
-borrarAlquiler(id: number){
+borrarAlquiler(id: string){
 this.apiservice.borrarAlquiler(id).subscribe(
   (response) => {
     if (response.borrado === 'success') {

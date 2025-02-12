@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router, RouterLink } from '@angular/router';
 export interface Producto {
-  id: number;
+  id: string;
   nombre: string;
   precio: number;
   estado: boolean;
@@ -12,7 +12,7 @@ export interface Producto {
   ruta: string;
 }
 export interface Usuario{
-  id: number;
+  id: string;
   nombre: string;
   apellido: string;
   email: string;
@@ -22,11 +22,11 @@ export interface Usuario{
   sexo: string;
 }
 export interface Marca {
-  id: number;
+  id: string;
   nombre: string;
 }
 export interface Alquiler {
-  id: number;
+  id: string;
   id_producto: number;
   id_usuario: string;
   fecha_inicio: string;
@@ -55,19 +55,19 @@ export class ApiService {
   getUsuarios(): Observable<Usuario[]> {
     return this.http.get<Usuario[]>(this.apiUrl + "usuario/obtener");
   }
-  borrarUsuario(id: number): Observable<any> {
+  borrarUsuario(id: string): Observable<any> {
     const body = { id: id }; // Envía un objeto JSON con la propiedad "id"
     return this.http.post(this.apiUrl + "usuario/borrar1", body);
   }
-  borrarProducto(id: number): Observable<any> {
+  borrarProducto(id: string): Observable<any> {
     const body = { id: id }; // Envía un objeto JSON con la propiedad "id"
     return this.http.post(this.apiUrl + "productos/borrar1", body);
   }
-  borrarMarca(id: number): Observable<any> {
+  borrarMarca(id: string): Observable<any> {
     const body = { id: id }; // Envía un objeto JSON con la propiedad "id"
     return this.http.post(this.apiUrl + "marcas/borrar1", body);
   }
-  borrarAlquiler(id: number): Observable<any> {
+  borrarAlquiler(id: string): Observable<any> {
     const body = { id: id }; // Envía un objeto JSON con la propiedad "id"
     return this.http.post(this.apiUrl + "alquiler/borrar1", body);
   }

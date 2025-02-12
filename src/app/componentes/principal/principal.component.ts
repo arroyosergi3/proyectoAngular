@@ -1,9 +1,9 @@
-import { ApiService, Marca } from './../../services/api.service';
+import { ApiService } from './../../services/api.service';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 export interface Producto {
-  id: number;
+  id: string;
   nombre: string;
   precio: number;
   estado: boolean;
@@ -12,6 +12,10 @@ export interface Producto {
   ruta: string;
 }
 
+export interface Marca {
+  id: string;
+  nombre: string;
+}
 @Component({
   selector: 'app-principal',
   standalone: true,

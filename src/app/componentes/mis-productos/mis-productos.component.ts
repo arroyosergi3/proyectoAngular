@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 export interface Producto {
-  id: number;
+  id: string;
   nombre: string;
   precio: number;
   estado: boolean;
@@ -12,8 +12,8 @@ export interface Producto {
   ruta: string;
 }
 export interface Alquiler {
-  id: number;
-  id_producto: number;
+  id: string;
+  id_producto: string;
   fecha_inicio: string;
   fecha_fin: string;
 }

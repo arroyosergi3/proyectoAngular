@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AlquilarProductoComponent } from '../alquilar-producto-component/alquilar-producto-component.component';
 export interface Producto {
-  id: number;
+  id: string;
   nombre: string;
   precio: number;
   estado: boolean;
@@ -26,7 +26,7 @@ export class DetalleComponent implements OnInit{
   constructor(private route: ActivatedRoute, private apiService: ApiService) {}
 
   ngOnInit() {
-    const id = Number(this.route.snapshot.paramMap.get('id')); // Convertir a número
+    const id = this.route.snapshot.paramMap.get('id'); // Convertir a número
     this.apiService.getSaludo().subscribe(
       (data) => {
         this.productosJson = data;
