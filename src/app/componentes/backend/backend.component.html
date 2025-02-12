@@ -158,7 +158,7 @@
           <td>{{ marca.id }}</td>
           <td>{{ marca.nombre }}</td>
           <td>
-            <a href=""><button class="btn btn-primary">Editar</button></a>
+            <button class="btn btn-primary" [routerLink]="['/editMarca', marca.id]">Editar</button>
           </td>
           <td>
             <a href=""

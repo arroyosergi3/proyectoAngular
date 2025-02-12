@@ -20,7 +20,7 @@ export interface Alquiler {
 
 @Component({
   selector: 'app-mis-productos',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   templateUrl: './mis-productos.component.html',
   styleUrl: './mis-productos.component.css'
 })

@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 export interface Producto {
   id: string;
@@ -36,7 +37,7 @@ export interface Marca{
 @Component({
   selector: 'app-backend',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './backend.component.html',
   styleUrl: './backend.component.css'
 })
@@ -155,17 +156,20 @@ this.apiservice.borrarProducto(id).subscribe(
 )
 }
 borrarMarca(id: string){
-this.apiservice.borrarMarca(id).subscribe(
-  (response) => {
-    if (response.borrado === 'success') {
-      alert("MARCA BORRADA CON EXITO");
-    }
-    if (response.borrado === 'fail') {
-      alert("MARCA NO BORRADA");
-    }
-  },
-)
-}
+  this.apiservice.borrarMarca(id).subscribe(
+    (response) => {
+      if (response.borrado === 'success') {
+        alert("MARCA BORRADA CON EXITO");
+      }
+      if (response.borrado === 'fail') {
+        alert("MARCA NO BORRADA");
+      }
+    },
+  )
+  }
+  editMarca(id: string){
+    // REDIRIGIR A LA MARCA
+  }
 borrarAlquiler(id: string){
 this.apiservice.borrarAlquiler(id).subscribe(
   (response) => {
