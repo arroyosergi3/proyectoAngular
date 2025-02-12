@@ -1,28 +1,31 @@
 import { Component, OnInit } from '@angular/core';
+import { Usuario } from '../backend/backend.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
-import { Producto } from '../principal/principal.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-edit-producto',
-  standalone: true,
+  selector: 'app-edit-usuario',
   imports: [CommonModule, FormsModule],
-  templateUrl: './edit-producto.component.html',
-  styleUrl: './edit-producto.component.css'
+  templateUrl: './edit-usuario.component.html',
+  styleUrl: './edit-usuario.component.css'
 })
-export class EditProductoComponent implements OnInit {
+export class EditUsuarioComponent implements OnInit{
 
-  productos: Producto[] = []
-    producto: any;
+  productos: Usuario[] = []
+    usuario: any;
     id : any;
     nombre : any;
-    precio : any;
-    estado : any;
-    descripcion : any;
-    id_marca : any;
-    ruta : any;
+    apellido : any;
+    email : any;
+    sexo : any;
+    pais : any;
+    contrasena : any;
+    rol : any;
+
+
+
     constructor(private route: ActivatedRoute, private apiService: ApiService, private router:Router) {}
     ngOnInit() {
       const id = String(this.route.snapshot.paramMap.get('id')); // Convertir a número
@@ -31,20 +34,21 @@ export class EditProductoComponent implements OnInit {
         this.router.navigate(['/']); // Evita seguir si el id es inválido
         return;
       }
-      this.apiService.getProductos().subscribe(
+      this.apiService.getUsuarios().subscribe(
         (data) => {
           this.productos = data;
          // console.log("Productos obtenidos arsa:", this.productos); // Para depuración
-          this.producto = this.productos.find(prod => prod.id == id); // Buscar el producto
-          if (this.producto) {
+          this.usuario = this.productos.find(prod => prod.id == id); // Buscar el producto
+          if (this.usuario) {
 
-        this.id = this.producto.id;
-        this.nombre = this.producto.nombre;
-        this.precio = this.producto.precio;
-        this.estado = this.producto.estado;
-        this.descripcion = this.producto.descripcion;
-        this.id_marca = this.producto.marca;
-        this.ruta = this.producto.ruta;
+        this.id = this.usuario.id;
+        this.nombre = this.usuario.nombre;
+        this.apellido = this.usuario.apellido;
+        this.email = this.usuario.email;
+        this.sexo = this.usuario.sexo;
+        this.pais = this.usuario.pais;
+        this.rol = this.usuario.rol;
+        this.contrasena = this.usuario.contrasena;
           }else{
             alert("OJITO QUE EL PRODUCTO ES UNDEFINED");
           }
@@ -56,17 +60,16 @@ export class EditProductoComponent implements OnInit {
     }
 
     onSubmit(){
-      this.apiService.updateProducto(this.id, this.nombre, this.precio, this.estado, this.descripcion, this.id_marca, this.ruta).subscribe(
+      this.apiService.updateUsuario(this.id, this.nombre, this.apellido, this.email, this.rol, this.contrasena, this.pais, this.sexo).subscribe(
         (response) => {
          alert(response.message);
          this.router.navigate(['/backend']); // Evita seguir si el id es inválido
         },
         (error) => {
-          console.log('Error al actualizar el producto:', error);
+          console.log('Error al actualizar el usuario:', error);
         }
 
       );
     }
-
 
 }

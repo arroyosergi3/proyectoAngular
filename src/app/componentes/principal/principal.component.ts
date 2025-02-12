@@ -32,7 +32,7 @@ export class PrincipalComponent implements OnInit {
   ngOnInit() {
     this.rol = this.apiservice.getRolUsuario();
 
-    this.apiservice.getSaludo().subscribe(
+    this.apiservice.getProductos().subscribe(
       (data) => {
         this.productosJson = data;  // Asignamos los productos obtenidos de la API
       },
@@ -45,13 +45,13 @@ export class PrincipalComponent implements OnInit {
     this.apiservice.getMarcas().subscribe(
       (data) => {
         this.marcas = data;
-        console.log(this.marcas);
+        //console.log(this.marcas);
       },
       (error) => {
         console.log('Error al obtener los productos:', error);
       }
     );
-     console.log("EL ROL DEL USUARIO ES: ", this.rol);
+    // console.log("EL ROL DEL USUARIO ES: ", this.rol);
   }
 
 }

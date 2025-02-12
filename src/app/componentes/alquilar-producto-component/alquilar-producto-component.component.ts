@@ -95,6 +95,7 @@ export class AlquilarProductoComponent implements OnInit{
   }
 
   onSubmit() {
+
     var $error = document.getElementById('error');
     if (this.formulario.valid) {
       if ($error != null) {

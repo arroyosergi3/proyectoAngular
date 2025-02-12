@@ -44,7 +44,7 @@
           <td>{{ producto.marca }}</td>
           <td>{{ producto.ruta }}</td>
           <td>
-            <a href=""><button class="btn btn-primary" [routerLink]="['/editProducto', producto.id]">Editar</button></a>
+            <button class="btn btn-primary" [routerLink]="['/editProducto', producto.id]">Editar</button>
           </td>
           <td>
             <button
@@ -62,7 +62,7 @@
     <table
       class="table my-4 table-striped d-none"
       #tablaUsuarios
-      title="Tabla de Productos"
+      title="Tabla de Usuario"
     >
       <thead>
         <tr>
@@ -89,7 +89,7 @@
           <td>{{ usuario.pais }}</td>
           <td>{{ usuario.sexo }}</td>
           <td>
-            <a href=""><button class="btn btn-primary">Editar</button></a>
+            <button class="btn btn-primary" [routerLink]="['/editUsuario', usuario.id]" >Editar</button>
           </td>
           <td>
             <button class="btn btn-danger" (click)="borrarUsuario(usuario.id)">

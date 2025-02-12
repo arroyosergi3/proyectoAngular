@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -16,9 +17,10 @@ export class LoginComponent {
   constructor(private apiService: ApiService, private router: Router) { }
 
   onSubmit() {
+    console.log("CLIC EN LOGIN")
     this.apiService.login(this.email, this.contrasena).subscribe(
       (response) => {
-        if (response.result === 'ok') {
+        if (response.result == 'ok') {
           const idUsuario = response.id_usuario;
           const rol = response.rol;
           if (idUsuario && rol) {
@@ -30,8 +32,8 @@ export class LoginComponent {
         if(response.email != null){
           alert("Credenciales Incorrectas");
         }
-        if (response.result === 'nullUser') {
-          alert("Si, tet eiene que redirigir, y con tu email "+ this.email);
+        if (response.result == 'nullUser') {
+          //alert("Si, te tiene que redirigir, y con tu email "+ this.email);
           this.router.navigate(['/register/'+this.email]);
         }
       },

@@ -36,7 +36,6 @@ export interface Marca{
 }
 @Component({
   selector: 'app-backend',
-  standalone: true,
   imports: [CommonModule, RouterLink],
   templateUrl: './backend.component.html',
   styleUrl: './backend.component.css'
@@ -55,7 +54,7 @@ export class BackendComponent implements OnInit{
 
   ngOnInit(){
     // Obtener productos
-    this.apiservice.getSaludo().subscribe(
+    this.apiservice.getProductos().subscribe(
       (data) => {
         this.productos = data;  // Asignamos los productos obtenidos de la API
 

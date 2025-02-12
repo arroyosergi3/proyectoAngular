@@ -27,10 +27,10 @@ export class DetalleComponent implements OnInit{
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id'); // Convertir a número
-    this.apiService.getSaludo().subscribe(
+    this.apiService.getProductos().subscribe(
       (data) => {
         this.productosJson = data;
-        this.producto = this.productosJson.find(prod => prod.id === id); // Buscar el producto
+        this.producto = this.productosJson.find(prod => prod.id == id); // Buscar el producto
       },
       (error) => {
         console.log('Error al obtener los productos:', error);

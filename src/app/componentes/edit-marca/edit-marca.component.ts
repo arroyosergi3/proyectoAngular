@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-edit-marca',
-  standalone: true, 
+  standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './edit-marca.component.html',
   styleUrl: './edit-marca.component.css'
@@ -16,7 +16,9 @@ export class EditMarcaComponent implements OnInit{
   marca: any;
   id : any;
   nombre : any;
-  constructor(private route: ActivatedRoute, private apiService: ApiService, private router:Router) {}
+  constructor(private route: ActivatedRoute, private apiService: ApiService, private router:Router) {
+
+  }
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id'); // Convertir a número
     this.apiService.getMarcas().subscribe(
@@ -36,6 +38,7 @@ export class EditMarcaComponent implements OnInit{
     this.apiService.updateMarca(this.id, this.nombre).subscribe(
       (response) => {
        alert(response.message);
+       this.router.navigate(['/backend']); // Evita seguir si el id es inválido
       },
       (error) => {
         console.log('Error al actualizar la marca:', error);

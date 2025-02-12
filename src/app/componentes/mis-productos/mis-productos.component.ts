@@ -71,7 +71,7 @@ export class MisProductosComponent {
           console.log('Error al obtener los alquileres:', error);
         }
       );
-      this.apiservice.getSaludo().subscribe(
+      this.apiservice.getProductos().subscribe(
         (data) => {
           this.productos = data;  // Asignamos los productos obtenidos de la API
 

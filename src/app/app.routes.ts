@@ -10,6 +10,8 @@ import { BackendComponent } from './componentes/backend/backend.component';
 import { adminGuard } from './guards/admin.guard';
 import { EditMarcaComponent } from './componentes/edit-marca/edit-marca.component';
 import { EditProductoComponent } from './componentes/edit-producto/edit-producto.component';
+import { EditUsuarioComponent } from './componentes/edit-usuario/edit-usuario.component';
+import { EditAlquilerComponent } from './componentes/edit-alquiler/edit-alquiler.component';
 
 export const routes: Routes = [
   {path: '',component: PrincipalComponent},
@@ -19,5 +21,7 @@ export const routes: Routes = [
   {path: 'misProductos',component: MisProductosComponent, canActivate: [authGuard]},
   { path: 'detalle/:id', component: DetalleComponent },
   { path: 'editMarca/:id', component: EditMarcaComponent },
+  { path: 'editUsuario/:id', component: EditUsuarioComponent },
+  { path: 'editAlquiler/:id', component: EditAlquilerComponent },
   { path: 'editProducto/:id', component: EditProductoComponent }
 ];

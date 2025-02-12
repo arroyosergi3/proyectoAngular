@@ -32,7 +32,6 @@ export interface Alquiler {
   fecha_inicio: string;
   fecha_fin: string;
 }
-
 @Injectable({
   providedIn: 'root'
 })
@@ -42,7 +41,7 @@ export class ApiService {
   private apiUrl = 'http://localhost:9090/'; // URL de la API de Spring Boot
 
   constructor(private http: HttpClient, private router: Router) { }
-  getSaludo(): Observable<Producto[]> {
+  getProductos(): Observable<Producto[]> {
     return this.http.get<Producto[]>(this.apiUrl + "productos/obtener");
   }
 
@@ -83,19 +82,30 @@ export class ApiService {
   }
 
   setUsuario(id: number, rol: string) {
+    if (typeof window !== 'undefined') {
     localStorage.setItem('id_usuario', id.toString());
     localStorage.setItem('rol', rol);
   }
+}
 
   getIdUsuario(): number | null {
-    const id = localStorage.getItem('id_usuario');
-    return id ? parseInt(id, 10) : null;
+    if (typeof window !== 'undefined') {
+
+      const id = localStorage.getItem('id_usuario');
+      return id ? parseInt(id, 10) : null;
+    }else{
+      return null;
+    }
 
   }
 
   // Obtener el rol del usuario autenticado desde localStorage
   getRolUsuario(): string  {
+    if (typeof window !== 'undefined') {
    var rol = localStorage.getItem('rol');
+  }else{
+    rol = 'cliente';
+  }
     if (rol) {
       return rol;
     }else{
@@ -126,6 +136,8 @@ export class ApiService {
   }
 
   cookieExists(cookieName: string): boolean {
+    if (typeof window !== 'undefined') {
+
     const cookies = document.cookie;
     const cookieArray = cookies.split(';');
     for (let i = 0; i < cookieArray.length; i++) {
@@ -135,20 +147,32 @@ export class ApiService {
         }
     }
     return false;
+    }else{
+      return false;
+    }
+
 }
 
 isAdmin(): boolean {
-  let rol = localStorage.getItem('rol');
+  if (typeof window !== 'undefined') {
+    let rol = localStorage.getItem('rol');
   if (rol === 'admin') {
     return true;
   }else{
     return false;
   }
+  }else{
+    return false;
+  }
+
 }
 
   logOut() {
+    if (typeof window !== 'undefined') {
+
     localStorage.removeItem('id_usuario');
     localStorage.removeItem('rol');
+    }
     this.setUsuario(0, "");
     this.deleteCookie('jwt');
     alert("Sesion cerrada");
@@ -158,23 +182,26 @@ isAdmin(): boolean {
   }
 
   deleteCookie(name: string): void {
-    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+    if (typeof window !== 'undefined') {
+      document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+    }
+
   }
 
   updateMarca(id: string, nombre:string){
     const body = { id, nombre };
     return this.http.post<any>(this.apiUrl + "marcas/actualizar", body);
   }
-  updateUsuario(id: string, nombre:string){
-    const body = { id, nombre };
-    return this.http.post<any>(this.apiUrl + "usuarios/actualizar", body);
+  updateUsuario(id: string, nombre:string, apellido:string, email:string, rol:string, contrasena:string, pais:string, sexo:string){
+    const body = { id, nombre, apellido, email, rol, contrasena, pais, sexo };
+    return this.http.post<any>(this.apiUrl + "usuario/actualizar", body);
   }
   updateProducto(id: string, nombre:string, precio:number, estado:boolean, descripcion:string, marca:string,ruta:string,){
     const body = { id, nombre, precio, estado, descripcion, marca, ruta };
     return this.http.post<any>(this.apiUrl + "productos/actualizar", body);
   }
-  updateAlquiler(id: string, nombre:string){
-    const body = { id, nombre };
+  updateAlquiler(id: string, id_usuario:string, id_producto:string, fecha_inicio:string, fecha_fin:string){
+    const body = { id, id_usuario, id_producto, fecha_inicio, fecha_fin };
     return this.http.post<any>(this.apiUrl + "alquiler/actualizar", body);
   }
 
