@@ -5,7 +5,7 @@
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
       <!-- Row de productos-->
 
-          <table class="table table-striped table-success">
+          <table class="table table-hover">
             <thead>
               <tr>
                 <th scope="col">Producto</th>
@@ -50,7 +50,7 @@
                     <tr *ngFor="let alquiler of alquileresPasados">
                       <td *ngIf="productos?.length">
                         <ng-container *ngFor="let producto of productos">
-                          <ng-container *ngIf="alquiler?.id_producto && producto?.id && alquiler.id_producto === producto.id">
+                          <ng-container *ngIf="alquiler?.id_producto && producto?.id && alquiler.id_producto == producto.id">
                             {{ producto.nombre }}
                           </ng-container>
                         </ng-container>

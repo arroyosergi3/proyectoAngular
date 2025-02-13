@@ -1,7 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import {  RouterLink } from '@angular/router';
+import { FormGroup } from '@angular/forms';
 
 export interface Producto {
   id: string;
@@ -36,7 +37,8 @@ export interface Marca{
 }
 @Component({
   selector: 'app-backend',
-  imports: [CommonModule, RouterLink],
+  standalone: true,
+  imports: [CommonModule, RouterLink, FormGroup],
   templateUrl: './backend.component.html',
   styleUrl: './backend.component.css'
 })
@@ -45,7 +47,7 @@ export interface Marca{
 
 export class BackendComponent implements OnInit{
 
-  constructor(private apiservice: ApiService) { }
+  constructor( private apiservice: ApiService) {}
 
   productos: Producto[] = []
   alquileres: Alquiler[] = []
@@ -96,10 +98,13 @@ export class BackendComponent implements OnInit{
       }
     );
   }
-@ViewChild('tablaProductos') tablaProductos!: ElementRef;
+  @ViewChild('tablaProductos') tablaProductos!: ElementRef;
 @ViewChild('tablaUsuarios') tablaUsuarios!: ElementRef;
 @ViewChild('tablaAlquileres') tablaAlquileres!: ElementRef;
 @ViewChild('tablaMarcas') tablaMarcas!: ElementRef;
+
+@ViewChild('formularioMarca') formularioMarca!: ElementRef;
+@ViewChild('formualrioProducto') formualrioProducto!: ElementRef;
 
 mostrarTabla(tipo: string) {
   console.log("Mostrando tabla de:", tipo);
@@ -166,9 +171,7 @@ borrarMarca(id: string){
     },
   )
   }
-  editMarca(id: string){
-    // REDIRIGIR A LA MARCA
-  }
+
 borrarAlquiler(id: string){
 this.apiservice.borrarAlquiler(id).subscribe(
   (response) => {
@@ -181,6 +184,15 @@ this.apiservice.borrarAlquiler(id).subscribe(
   },
 )
 }
+
+anadirMarca(){
+
+}
+
+anadirProducto(){
+
+}
+
 }
 
 

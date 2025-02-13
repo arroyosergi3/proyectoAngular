@@ -1,17 +1,25 @@
 <div class="container py-5">
   <h1 class="mb-4 text-center">BACKEND</h1>
 
-  <button class="mx-2 btn btn-mo" (click)="mostrarTabla('productos')">
+  <button class="mx-2 my-2 btn btn-mo" (click)="mostrarTabla('productos')">
     Mostar Productos
   </button>
-  <button class="mx-2 btn btn-mo" (click)="mostrarTabla('usuarios')">
+  <button class="mx-2 my-2 btn btn-mo" (click)="mostrarTabla('usuarios')">
     Mostar Usuarios
   </button>
-  <button class="mx-2 btn btn-mo" (click)="mostrarTabla('alquileres')">
+  <button class="mx-2 my-2 btn btn-mo" (click)="mostrarTabla('alquileres')">
     Mostar Alquileres
   </button>
-  <button class="mx-2 btn btn-mo" (click)="mostrarTabla('marcas')">
+  <button class="mx-2 my-2 btn btn-mo" (click)="mostrarTabla('marcas')">
     Mostar Marcas
+  </button>
+
+  <button class="mx-2 my-2 btn btn-mo" (click)="anadirMarca()">
+    Añadir Marca
+  </button>
+
+  <button class="mx-2 my-2 btn btn-mo" (click)="anadirProducto()">
+    Añadir usuario
   </button>
   <!-- Row de toda la pagina-->
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
@@ -170,5 +178,34 @@
         </tr>
       </tbody>
     </table>
+
+
+    <!-- FORMULARIO DE TABLA -->
+    <div class="container d-none" #formularioMarca>
+      <h2>Crear Marca</h2>
+      <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="nombre">Nombre de la Marca</label>
+          <input
+            type="text"
+            id="nombre"
+            class="form-control"
+            [(ngModel)]="nombre"
+            name="nombre"
+            required
+            minlength="3"
+            placeholder="Nombre de la marca">
+
+        </div>
+        <button type="submit" class="btn btn-mo" >Crear Marca</button>
+      </form>
+    </div>
+
+
+
+
+
+
+
   </div>
 </div>

@@ -1,5 +1,8 @@
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../../services/api.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Producto } from '../principal/principal.component';
 
 @Component({
   selector: 'app-alquilar-producto-component',
@@ -9,79 +12,49 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './alquilar-producto-component.component.css'
 })
 export class AlquilarProductoComponent implements OnInit{
+  constructor(private fb: FormBuilder, private apiService: ApiService, private router: Router, private route: ActivatedRoute) {
+    this.formulario = this.fb.group({
+      id_producto: [''], // Campo oculto
+      precio: [''], // Campo oculto
+      fecha_inicio: ['', Validators.required], // Fecha de inicio
+      fecha_fin: ['', Validators.required], // Fecha de fin
+    }, { validators: this.validarFechas }); // Validador personalizado
+  }
+
   formulario: FormGroup;
-  productos = [
-    {
-      id: 1,
-      nombre: "Bolso de lujo",
-      precio: 1200.99,
-      estado: true,
-      descripcion: "Bolso de alta calidad, perfecto para ocasiones especiales.",
-      marca: "Versaci",
-      ruta: "1.png"
-    },
-    {
-      id: 2,
-      nombre: "Zapatos deportivos",
-      precio: 99.99,
-      estado: true,
-      descripcion: "Zapatos cómodos y elegantes para todo tipo de actividades.",
-      marca: "Diar",
-      ruta: "2.png"
-    },
-    {
-      id: 3,
-      nombre: "Reloj de lujo",
-      precio: 450.00,
-      estado: false,
-      descripcion: "Reloj de lujo con detalles en oro.",
-      marca: "Gucco",
-      ruta: "3.png"
-    },
-    {
-      id: 4,
-      nombre: "Chaqueta de cuero",
-      precio: 299.50,
-      estado: true,
-      descripcion: "Chaqueta de cuero auténtico para climas fríos.",
-      marca: "Chanal",
-      ruta: "4.png"
-    },
-    {
-      id: 5,
-      nombre: "Gafas de sol",
-      precio: 150.75,
-      estado: true,
-      descripcion: "Gafas de sol de diseño exclusivo.",
-      marca: "Hermas",
-      ruta: "5.png"
-    }
-  ];
+
+  productos : Producto[] = [];
   producto: any;
+  id_producto : any;
+  fecha_inicio : any;
+  fecha_fin : any;
   ngOnInit(): void {
-    this.producto = this.productos.find((producto) => producto.id === 1);
+
+    const id = this.route.snapshot.paramMap.get('id'); // Convertir a número
+    this.apiService.getProductos().subscribe(
+      (response: any) => {
+        this.productos = response;
+      },
+      (error) => {
+        console.error(error);
+      }
+    )
+    this.producto = this.productos.find((producto) => producto.id == "1");
     if (this.producto) {
       this.formulario.patchValue({
-        id: this.producto.id,
+        id_producto: this.producto.id,
         precio: this.producto.precio
       });
     }
   }
 
-  constructor(private fb: FormBuilder) {
-    this.formulario = this.fb.group({
-      id: [''], // Campo oculto
-      precio: [''], // Campo oculto
-      inicio: ['', Validators.required], // Fecha de inicio
-      fin: ['', Validators.required], // Fecha de fin
-    }, { validators: this.validarFechas }); // Validador personalizado
-  }
+
 
   // Validador personalizado para comparar fechas
   validarFechas(form: FormGroup) {
 
-    const inicio = form.get('inicio')?.value;
-    const fin = form.get('fin')?.value;
+    const inicio = form.get('fecha_inicio')?.value;
+    const fin = form.get('fecha_fin')?.value;
 
     if (inicio && fin) {
       const fechaInicio = new Date(inicio);
@@ -95,21 +68,39 @@ export class AlquilarProductoComponent implements OnInit{
   }
 
   onSubmit() {
-
-    var $error = document.getElementById('error');
     if (this.formulario.valid) {
-      if ($error != null) {
-        $error.style.display = "none";
-      }
-      console.log('Formulario válido', this.formulario.value);
+      // Extraer solo los valores necesarios
+      let { id_producto, fecha_inicio, fecha_fin } = this.formulario.value;
+
+      // Convertir `id_producto` a string
+      id_producto = String(id_producto);
+
+      // Crear el payload con el `id_producto` como string
+      const payload = { id_producto, fecha_inicio, fecha_fin };
+
+      console.log("Enviando payload:", payload); // 🔹 Verificar qué datos se están enviando
+
+      this.apiService.comprobarIsAlquilado(payload).subscribe(
+        (response) => {
+          if (response.alquilado == 'true') {
+            alert("Lo sentimos, este producto ya está alquilado en esa fecha");
+          } else {
+            alert("Producto alquilado con éxito");
+          }
+        },
+        (error) => {
+          console.error('ERROR AL COMPROBAR SI ESTÁ ALQUILADO:', error);
+        }
+      );
     } else {
-
-      if ($error != null) {
-        $error.style.display = "block";
-      }
-
       console.log('Formulario inválido');
     }
   }
+
+
+
+
+
+
 }
 

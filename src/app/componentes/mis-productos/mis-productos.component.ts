@@ -20,6 +20,7 @@ export interface Alquiler {
 
 @Component({
   selector: 'app-mis-productos',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './mis-productos.component.html',
   styleUrl: './mis-productos.component.css'
@@ -29,8 +30,11 @@ export class MisProductosComponent {
   alquileresPasados: Alquiler[] = []
   productos: Producto[] = []
     constructor(private apiservice: ApiService) { }
-    /*
+
+
     ngOnInit() {
+
+      /*
       this.apiservice.getMisProductos().subscribe(
         (data) => {
           this.misAlquileres = data;
@@ -40,21 +44,17 @@ export class MisProductosComponent {
           console.log('Error al obtener los productos:', error);
         }
       );
-    }
-      */
-    ngOnInit() {
+*/
       this.apiservice.getMisProductos().subscribe(
         (alquileres : Alquiler[]) => {
-
           const hoy = new Date();
-      hoy.setHours(0, 0, 0, 0); // Eliminar horas
+          hoy.setHours(0, 0, 0, 0);
 
       //console.log("FECHA DE HOY: ", hoy);
 
       // Filtrar alquileres activos y vencidos correctamente
       this.misAlquileres = alquileres.filter((alquiler) => {
         const fechaFin = new Date(alquiler.fecha_fin);
-       // console.log("FECHA DE FIN: ", fechaFin);
         return fechaFin >= hoy && alquiler.fecha_fin;  // Verifica que 'fecha_fin' exista
       });
 
@@ -63,8 +63,7 @@ export class MisProductosComponent {
         return fechaFin < hoy && alquiler.fecha_fin;
       });
 
-         // console.log("ALQUILERES MIOS EN VIGOR: ",this.misAlquileres);
-          //console.log("ALQUILERES PASADOS: ",this.alquileresPasados);
+
 
         },
         (error) => {

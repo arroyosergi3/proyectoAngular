@@ -116,7 +116,7 @@ export class ApiService {
   getMisProductos(): Observable<any> {
     const idUsuario = this.getIdUsuario();
     if (!idUsuario) return new Observable(); // Retorna vacío si no hay usuario
-    return this.http.post<Alquiler[]>(this.apiUrl + "alquileres/misProductos", { id_usuario: idUsuario });
+    return this.http.post<Alquiler[]>(this.apiUrl + "alquiler/misProductos", { id_usuario: idUsuario });
   }
   // Método para obtener el id_usuario desde la sesión
   getUserIdFromSession(): Observable<string> {
@@ -205,4 +205,8 @@ isAdmin(): boolean {
     return this.http.post<any>(this.apiUrl + "alquiler/actualizar", body);
   }
 
+  comprobarIsAlquilado(payload : any): Observable<any> {
+    const body = { payload };
+    return this.http.post<any>(this.apiUrl + "alquiler/estaAlquilado", body);
+  }
 }
