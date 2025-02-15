@@ -1,8 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { CommonModule } from '@angular/common';
-import {  RouterLink } from '@angular/router';
-import { FormGroup } from '@angular/forms';
+import {  Router, RouterLink } from '@angular/router';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 export interface Producto {
   id: string;
@@ -38,7 +38,7 @@ export interface Marca{
 @Component({
   selector: 'app-backend',
   standalone: true,
-  imports: [CommonModule, RouterLink, FormGroup],
+  imports: [CommonModule, RouterLink, ReactiveFormsModule, FormsModule],
   templateUrl: './backend.component.html',
   styleUrl: './backend.component.css'
 })
@@ -47,13 +47,54 @@ export interface Marca{
 
 export class BackendComponent implements OnInit{
 
-  constructor( private apiservice: ApiService) {}
+  constructor( private apiservice: ApiService,private router: Router) {}
 
+  nombreMarca ='';
+  nombreProducto = '';
+  precioProducto = '';
+  descripcionProducto = '';
+  idMarcaProducto ='';
+  rutaProducto = '';
+  precioNumber :number | undefined;
+  idMarcaNumebr :number | undefined;
   productos: Producto[] = []
   alquileres: Alquiler[] = []
   usuarios: Usuario[] = []
   marcas: Marca[] = []
 
+  insertarProducto(){
+    this.precioNumber = Number.parseFloat(this.precioProducto);
+    this.idMarcaNumebr = Number.parseFloat(this.idMarcaProducto);
+    this.apiservice.insertProducto(this.nombreProducto, this.precioNumber, false, this.descripcionProducto, this.idMarcaNumebr, this.rutaProducto).subscribe
+    ({
+       next: (response) => {
+        alert("Producto insertado con exito");
+
+        setTimeout(() => {
+          this.router.navigate(['/backend']);
+        }, 2000);
+      },
+      error: (error) => {
+        alert("HA OCURRIDO UN ERROR AL INSERTAR EL PRODUCTO");
+      }
+    });
+  }
+
+
+  insertarMarca(){
+    this.apiservice.insertMarca(this.nombreMarca).subscribe({
+      next: (response) => {
+        alert("Marca insertada con exito");
+
+        setTimeout(() => {
+          this.router.navigate(['/backend']);
+        }, 2000);
+      },
+      error: (error) => {
+        alert("HA OCURRIDO UN ERROR AL INSERTAR LA MARCA");
+      }
+    });
+  }
   ngOnInit(){
     // Obtener productos
     this.apiservice.getProductos().subscribe(
@@ -65,7 +106,6 @@ export class BackendComponent implements OnInit{
         console.log('Error al obtener los productos:', error);
       }
     );
-
     //Obtener alquiler
     this.apiservice.getAlquileres().subscribe(
       (data) => {
@@ -76,7 +116,6 @@ export class BackendComponent implements OnInit{
         console.log('Error al obtener los productos:', error);
       }
     );
-
     //Obtener usuarios
     this.apiservice.getUsuarios().subscribe(
       (data) => {
@@ -88,7 +127,6 @@ export class BackendComponent implements OnInit{
       }
     );
     //Obtener marcas
-
     this.apiservice.getMarcas().subscribe(
       (data) => {
         this.marcas = data;
@@ -102,9 +140,11 @@ export class BackendComponent implements OnInit{
 @ViewChild('tablaUsuarios') tablaUsuarios!: ElementRef;
 @ViewChild('tablaAlquileres') tablaAlquileres!: ElementRef;
 @ViewChild('tablaMarcas') tablaMarcas!: ElementRef;
-
 @ViewChild('formularioMarca') formularioMarca!: ElementRef;
-@ViewChild('formualrioProducto') formualrioProducto!: ElementRef;
+//@ViewChild('formularioProducto') formularioProducto!: ElementRef;
+@ViewChild('formularioProducto', { static: false }) formularioProducto!: ElementRef;
+
+
 
 mostrarTabla(tipo: string) {
   console.log("Mostrando tabla de:", tipo);
@@ -114,24 +154,32 @@ mostrarTabla(tipo: string) {
     this.tablaUsuarios.nativeElement.classList.add('d-none');
     this.tablaMarcas.nativeElement.classList.add('d-none');
     this.tablaAlquileres.nativeElement.classList.add('d-none');
+    this.formularioMarca.nativeElement.classList.add('d-none');
+    this.formularioProducto.nativeElement.classList.add('d-none')
   }
   if (tipo === 'usuarios' && this.tablaUsuarios) {
     this.tablaUsuarios.nativeElement.classList.remove('d-none');
     this.tablaProductos.nativeElement.classList.add('d-none');
     this.tablaMarcas.nativeElement.classList.add('d-none');
     this.tablaAlquileres.nativeElement.classList.add('d-none');
+    this.formularioMarca.nativeElement.classList.add('d-none');
+    this.formularioProducto.nativeElement.classList.add('d-none')
   }
   if (tipo === 'alquileres' && this.tablaAlquileres) {
     this.tablaAlquileres.nativeElement.classList.remove('d-none');
     this.tablaProductos.nativeElement.classList.add('d-none');
     this.tablaMarcas.nativeElement.classList.add('d-none');
     this.tablaUsuarios.nativeElement.classList.add('d-none');
+    this.formularioMarca.nativeElement.classList.add('d-none');
+    this.formularioProducto.nativeElement.classList.add('d-none')
   }
   if (tipo === 'marcas' && this.tablaMarcas) {
     this.tablaMarcas.nativeElement.classList.remove('d-none');
     this.tablaProductos.nativeElement.classList.add('d-none');
     this.tablaUsuarios.nativeElement.classList.add('d-none');
     this.tablaAlquileres.nativeElement.classList.add('d-none');
+    this.formularioMarca.nativeElement.classList.add('d-none');
+    this.formularioProducto.nativeElement.classList.add('d-none')
   }
 }
 
@@ -186,13 +234,16 @@ this.apiservice.borrarAlquiler(id).subscribe(
 }
 
 anadirMarca(){
-
+  this.formularioMarca.nativeElement.classList.remove('d-none');
+  this.formularioProducto.nativeElement.classList.add('d-none')
 }
 
-anadirProducto(){
+anadirProducto() {
+
+  this.formularioMarca.nativeElement.classList.add('d-none');
+  this.formularioProducto.nativeElement.classList.remove('d-none')
 
 }
-
 }
 
 

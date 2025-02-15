@@ -1,3 +1,1 @@
-- CRUD de bakcend
-- Mostrar en principal solo si el estado es false
 -Mostar el precio total, darle a alquilar y cambiar el estado del producto

@@ -192,6 +192,14 @@ isAdmin(): boolean {
     const body = { id, nombre };
     return this.http.post<any>(this.apiUrl + "marcas/actualizar", body);
   }
+  insertMarca( nombre:string){
+    const body = { nombre };
+    return this.http.post<any>(this.apiUrl + "marcas/anadirnuevo  ", body);
+  }
+  insertProducto( nombre:string, precio: number, estado:boolean, descripcion: string, id_marca: number, ruta: string){
+    const body = { nombre, precio, estado, descripcion, id_marca, ruta };
+    return this.http.post<any>(this.apiUrl + "productos/anadirnuevo  ", body);
+  }
   updateUsuario(id: string, nombre:string, apellido:string, email:string, rol:string, contrasena:string, pais:string, sexo:string){
     const body = { id, nombre, apellido, email, rol, contrasena, pais, sexo };
     return this.http.post<any>(this.apiUrl + "usuario/actualizar", body);

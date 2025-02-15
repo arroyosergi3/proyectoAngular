@@ -19,7 +19,7 @@
   </button>
 
   <button class="mx-2 my-2 btn btn-mo" (click)="anadirProducto()">
-    Añadir usuario
+    Añadir Producto
   </button>
   <!-- Row de toda la pagina-->
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
@@ -180,17 +180,17 @@
     </table>
 
 
-    <!-- FORMULARIO DE TABLA -->
+    <!-- FORMULARIO DE MARCA -->
     <div class="container d-none" #formularioMarca>
       <h2>Crear Marca</h2>
-      <form (ngSubmit)="onSubmit()">
+      <form (ngSubmit)="insertarMarca()">
         <div class="form-group">
           <label for="nombre">Nombre de la Marca</label>
           <input
             type="text"
             id="nombre"
             class="form-control"
-            [(ngModel)]="nombre"
+            [(ngModel)]="nombreMarca"
             name="nombre"
             required
             minlength="3"
@@ -200,6 +200,77 @@
         <button type="submit" class="btn btn-mo" >Crear Marca</button>
       </form>
     </div>
+
+
+      <!-- FORMULARIO DE PRODUCTO -->
+<div class="container d-none" #formularioProducto>
+  <h2>Crear Producto</h2>
+  <form (ngSubmit)="insertarProducto()">
+
+    <!-- Nombre del Producto -->
+    <div class="form-group">
+      <label for="nombre">Nombre del Producto</label>
+      <input
+        type="text"
+        id="nombre"
+        class="form-control"
+        [(ngModel)]="nombreProducto"
+        name="nombre"
+        required
+        minlength="3"
+        placeholder="Nombre del producto">
+    </div>
+
+    <!-- Precio -->
+    <div class="form-group">
+      <label for="precio">Precio</label>
+      <input
+        type="number"
+        id="precio"
+        class="form-control"
+        [(ngModel)]="precioProducto"
+        name="precio"
+        step="0.01"
+        placeholder="Precio del producto">
+    </div>
+
+
+
+    <!-- Descripción -->
+    <div class="form-group">
+      <label for="descripcion">Descripción</label>
+      <textarea
+        id="descripcion"
+        class="form-control"
+        [(ngModel)]="descripcionProducto"
+        name="descripcion"
+        placeholder="Descripción del producto"></textarea>
+    </div>
+
+    <!-- Marca (Select con datos de API) -->
+    <div class="form-group">
+      <label for="marca">Marca</label>
+      <select id="marca" class="form-select" [(ngModel)]="idMarcaProducto" name="id_marca" required>
+        <option *ngFor="let marca of marcas" [value]="marca.id">{{ marca.nombre }}</option>
+      </select>
+    </div>
+
+    <!-- Ruta de imagen -->
+    <div class="form-group">
+      <label for="ruta">Ruta de Imagen</label>
+      <input
+        type="text"
+        id="ruta"
+        class="form-control"
+        [(ngModel)]="rutaProducto"
+        name="ruta"
+        placeholder="URL de la imagen del producto">
+    </div>
+
+    <button type="submit" class="btn btn-mo">Crear Producto</button>
+  </form>
+</div>
+
 
 
 
