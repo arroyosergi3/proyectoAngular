@@ -1,1 +1,2 @@
 -Mostar el precio total, darle a alquilar y cambiar el estado del producto
+- si doy lcic a formularios, borrar tablas

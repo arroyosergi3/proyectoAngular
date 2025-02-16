@@ -196,6 +196,10 @@ isAdmin(): boolean {
     const body = { nombre };
     return this.http.post<any>(this.apiUrl + "marcas/anadirnuevo  ", body);
   }
+  insertAlquiler( idusuario: string, idProducto : string, fecha_inicio : Date, fecha_fin:Date){
+    const body = { idusuario, idProducto, fecha_inicio, fecha_fin };
+    return this.http.post<any>(this.apiUrl + "alquiler/anadirnuevo  ", body);
+  }
   insertProducto( nombre:string, precio: number, estado:boolean, descripcion: string, id_marca: number, ruta: string){
     const body = { nombre, precio, estado, descripcion, id_marca, ruta };
     return this.http.post<any>(this.apiUrl + "productos/anadirnuevo  ", body);
@@ -215,6 +219,8 @@ isAdmin(): boolean {
 
   comprobarIsAlquilado(payload : any): Observable<any> {
     const body = { payload };
-    return this.http.post<any>(this.apiUrl + "alquiler/estaAlquilado", body);
+    return this.http.post<any>(this.apiUrl + "alquiler/estaAlquilado", body, {
+      headers: { 'Content-Type': 'application/json' }
+    });
   }
 }

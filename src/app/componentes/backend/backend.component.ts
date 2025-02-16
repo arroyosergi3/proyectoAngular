@@ -234,11 +234,21 @@ this.apiservice.borrarAlquiler(id).subscribe(
 }
 
 anadirMarca(){
+
+  this.tablaProductos.nativeElement.classList.add('d-none');
+  this.tablaUsuarios.nativeElement.classList.add('d-none');
+  this.tablaMarcas.nativeElement.classList.add('d-none');
+  this.tablaAlquileres.nativeElement.classList.add('d-none');
   this.formularioMarca.nativeElement.classList.remove('d-none');
   this.formularioProducto.nativeElement.classList.add('d-none')
 }
 
 anadirProducto() {
+
+  this.tablaProductos.nativeElement.classList.add('d-none');
+  this.tablaUsuarios.nativeElement.classList.add('d-none');
+  this.tablaMarcas.nativeElement.classList.add('d-none');
+  this.tablaAlquileres.nativeElement.classList.add('d-none');
 
   this.formularioMarca.nativeElement.classList.add('d-none');
   this.formularioProducto.nativeElement.classList.remove('d-none')

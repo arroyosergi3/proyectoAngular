@@ -1,4 +1,9 @@
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,50 +14,56 @@ import { Producto } from '../principal/principal.component';
   imports: [ReactiveFormsModule],
   standalone: true,
   templateUrl: './alquilar-producto-component.component.html',
-  styleUrl: './alquilar-producto-component.component.css'
+  styleUrl: './alquilar-producto-component.component.css',
 })
-export class AlquilarProductoComponent implements OnInit{
-  constructor(private fb: FormBuilder, private apiService: ApiService, private router: Router, private route: ActivatedRoute) {
-    this.formulario = this.fb.group({
-      id_producto: [''], // Campo oculto
-      precio: [''], // Campo oculto
-      fecha_inicio: ['', Validators.required], // Fecha de inicio
-      fecha_fin: ['', Validators.required], // Fecha de fin
-    }, { validators: this.validarFechas }); // Validador personalizado
+export class AlquilarProductoComponent implements OnInit {
+  constructor(
+    private fb: FormBuilder,
+    private apiService: ApiService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    this.formulario = this.fb.group(
+      {
+        id_producto: [''], // Campo oculto
+        precio: [''], // Campo oculto
+        fecha_inicio: ['', Validators.required], // Fecha de inicio
+        fecha_fin: ['', Validators.required], // Fecha de fin
+      },
+      { validators: this.validarFechas }
+    ); // Validador personalizado
   }
 
   formulario: FormGroup;
 
-  productos : Producto[] = [];
+  productos: Producto[] = [];
   producto: any;
-  id_producto : any;
-  fecha_inicio : any;
-  fecha_fin : any;
+  idUsuario: any;
+  id_producto: any;
+  fecha_inicio: any;
+  fecha_fin: any;
   ngOnInit(): void {
-
+    this.idUsuario = localStorage.getItem('id_usuario');
     const id = this.route.snapshot.paramMap.get('id'); // Convertir a número
     this.apiService.getProductos().subscribe(
       (response: any) => {
         this.productos = response;
+        this.producto = this.productos.find((producto) => producto.id == id);
+        if (this.producto) {
+          this.formulario.patchValue({
+            id_producto: this.producto.id,
+            precio: this.producto.precio,
+          });
+        }
       },
       (error) => {
         console.error(error);
       }
-    )
-    this.producto = this.productos.find((producto) => producto.id == "1");
-    if (this.producto) {
-      this.formulario.patchValue({
-        id_producto: this.producto.id,
-        precio: this.producto.precio
-      });
-    }
+    );
   }
-
-
 
   // Validador personalizado para comparar fechas
   validarFechas(form: FormGroup) {
-
     const inicio = form.get('fecha_inicio')?.value;
     const fin = form.get('fecha_fin')?.value;
 
@@ -78,15 +89,23 @@ export class AlquilarProductoComponent implements OnInit{
       // Crear el payload con el `id_producto` como string
       const payload = { id_producto, fecha_inicio, fecha_fin };
 
-      console.log("Enviando payload:", payload); // 🔹 Verificar qué datos se están enviando
+      console.log('Enviando payload:', payload); // 🔹 Verificar qué datos se están enviando
 
       this.apiService.comprobarIsAlquilado(payload).subscribe(
         (response) => {
           if (response.alquilado == 'true') {
-            alert("Lo sentimos, este producto ya está alquilado en esa fecha");
-          } else {
-            alert("Producto alquilado con éxito");
+            alert('Lo sentimos, este producto ya está alquilado en esa fecha');
           }
+          if (response.alquilado == 'false') {
+            alert('PONE QUE FALSE');
+          }
+          if (response.error == 'id_producto es null') {
+            alert('EL ID DE PRODUCTO ES NULL');
+          }
+          if(response.error == "id_producto no es un número válido"){
+            alert('EL ID DE PRODUCTO NO ES UN NUERO VÁLIDO');
+          }
+
         },
         (error) => {
           console.error('ERROR AL COMPROBAR SI ESTÁ ALQUILADO:', error);
@@ -96,11 +115,4 @@ export class AlquilarProductoComponent implements OnInit{
       console.log('Formulario inválido');
     }
   }
-
-
-
-
-
-
 }
-
