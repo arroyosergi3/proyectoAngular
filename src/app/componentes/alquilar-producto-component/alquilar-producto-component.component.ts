@@ -43,7 +43,8 @@ export class AlquilarProductoComponent implements OnInit {
   fecha_inicio: any;
   fecha_fin: any;
   ngOnInit(): void {
-    this.idUsuario = localStorage.getItem('id_usuario');
+    if (typeof window !== 'undefined') {
+      this.idUsuario = localStorage.getItem('id_usuario');
     const id = this.route.snapshot.paramMap.get('id'); // Convertir a número
     this.apiService.getProductos().subscribe(
       (response: any) => {
@@ -60,6 +61,8 @@ export class AlquilarProductoComponent implements OnInit {
         console.error(error);
       }
     );
+    }
+
   }
 
   // Validador personalizado para comparar fechas
@@ -94,7 +97,7 @@ export class AlquilarProductoComponent implements OnInit {
             alert('Lo sentimos, este producto ya está alquilado en esa fecha');
           }
           if (response.alquilado == 'false') {
-            console.log("El producto está disponible para alquilar");
+            //console.log("El producto está disponible para alquilar");
             this.apiService.insertAlquiler(id_producto, this.idUsuario, fecha_inicio, fecha_fin).subscribe(
               (response) => {
                 alert('Producto alquilado con exito');
@@ -117,7 +120,7 @@ export class AlquilarProductoComponent implements OnInit {
         }
       );
     } else {
-      console.log('Formulario inválido');
+      alert('Formulario inválido');
     }
   }
 }

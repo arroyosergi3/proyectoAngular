@@ -19,9 +19,9 @@ export const routes: Routes = [
   {path: 'login',component: LoginComponent},
   {path: 'register/:email',component: RegisterComponent},
   {path: 'misProductos',component: MisProductosComponent, canActivate: [authGuard]},
-  { path: 'detalle/:id', component: DetalleComponent },
-  { path: 'editMarca/:id', component: EditMarcaComponent },
-  { path: 'editUsuario/:id', component: EditUsuarioComponent },
-  { path: 'editAlquiler/:id', component: EditAlquilerComponent },
-  { path: 'editProducto/:id', component: EditProductoComponent }
+  { path: 'detalle/:id', component: DetalleComponent, canActivate: [authGuard] },
+  { path: 'editMarca/:id', component: EditMarcaComponent , canActivate: [adminGuard]},
+  { path: 'editUsuario/:id', component: EditUsuarioComponent , canActivate: [adminGuard]},
+  { path: 'editAlquiler/:id', component: EditAlquilerComponent , canActivate: [adminGuard]},
+  { path: 'editProducto/:id', component: EditProductoComponent , canActivate: [adminGuard]}
 ];
