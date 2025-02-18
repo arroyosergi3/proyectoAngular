@@ -86,20 +86,25 @@ export class AlquilarProductoComponent implements OnInit {
       // Convertir `id_producto` a string
       id_producto = String(id_producto);
 
-      // Crear el payload con el `id_producto` como string
-      const payload = { id_producto, fecha_inicio, fecha_fin };
 
-      console.log('Enviando payload:', payload); // 🔹 Verificar qué datos se están enviando
-
-      this.apiService.comprobarIsAlquilado(payload).subscribe(
+      this.apiService.comprobarIsAlquilado(id_producto, fecha_inicio, fecha_fin).subscribe(
         (response) => {
+          //console.log('estoy en response');
           if (response.alquilado == 'true') {
             alert('Lo sentimos, este producto ya está alquilado en esa fecha');
           }
           if (response.alquilado == 'false') {
-            alert('PONE QUE FALSE');
+            console.log("El producto está disponible para alquilar");
+            this.apiService.insertAlquiler(id_producto, this.idUsuario, fecha_inicio, fecha_fin).subscribe(
+              (response) => {
+                alert('Producto alquilado con exito');
+              },
+              (error) => {
+                alert('HA OCURRIDO UN ERROR AL ALQUILAR EL PRODUCTO');
+              }
+            )
           }
-          if (response.error == 'id_producto es null') {
+          if (response.error == 'null') {
             alert('EL ID DE PRODUCTO ES NULL');
           }
           if(response.error == "id_producto no es un número válido"){

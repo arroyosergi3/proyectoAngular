@@ -196,8 +196,13 @@ isAdmin(): boolean {
     const body = { nombre };
     return this.http.post<any>(this.apiUrl + "marcas/anadirnuevo  ", body);
   }
-  insertAlquiler( idusuario: string, idProducto : string, fecha_inicio : Date, fecha_fin:Date){
-    const body = { idusuario, idProducto, fecha_inicio, fecha_fin };
+  insertAlquiler( idusuario: string, idProducto : string, fecha_inicio : string, fecha_fin:string){
+    const body = {
+      id_usuario: { id: idusuario },
+      id_producto: { id: idProducto },
+      fecha_inicio: fecha_inicio,
+      fecha_fin: fecha_fin
+    };
     return this.http.post<any>(this.apiUrl + "alquiler/anadirnuevo  ", body);
   }
   insertProducto( nombre:string, precio: number, estado:boolean, descripcion: string, id_marca: number, ruta: string){
@@ -217,8 +222,8 @@ isAdmin(): boolean {
     return this.http.post<any>(this.apiUrl + "alquiler/actualizar", body);
   }
 
-  comprobarIsAlquilado(payload : any): Observable<any> {
-    const body = { payload };
+  comprobarIsAlquilado(id_producto : string, fecha_inicio: string, fecha_fin: string): Observable<any> {
+    const body = { id_producto, fecha_inicio, fecha_fin };
     return this.http.post<any>(this.apiUrl + "alquiler/estaAlquilado", body, {
       headers: { 'Content-Type': 'application/json' }
     });
