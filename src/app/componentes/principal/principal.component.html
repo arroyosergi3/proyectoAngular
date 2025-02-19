@@ -1,36 +1,43 @@
 <div class="container py-5">
   <h1 class="mb-4 text-center">Nuestros Productos</h1>
-<a href="backend" *ngIf="rol == 'admin'">Ir al backend</a>
+  <a href="backend" *ngIf="rol == 'admin'">Ir al backend</a>
   <!-- Row de toda la pagina-->
-  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-    <!-- Columna de filtros-->
-    <div class="mb-4 text-center col-md-2 col-lg-2 b-m">
-      Aqui van a ir los filtros
-    </div>
-    <div class="mb-4 text-center col-md-10 col-lg-10">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-4">
+
+    <div class="mb-4 text-center col-md-12 col-lg-12">
       <!-- Row de productos-->
       <div class="text-center row align-content-center justify-content-center">
-        <div class="p-0 mx-4 my-4 card" style="width:300px" *ngFor="let producto of productosJson">
-          <div ng>
-          <img class="px-0 mx-0 card-img-top" src="{{ producto.ruta }}" alt="Card image">
-          <div class="card-body">
-            <h4 class="card-title">{{ producto.nombre }}</h4>
-            <h5 class="card-text">{{ producto.precio }}€</h5>
-            <!-- Correcto: Usa ng-container y las directivas directamente -->
-<ng-container *ngFor="let marca of marcas">
-  <h6 *ngIf="marca.id === producto.marca">
-    {{ marca.nombre }}
-  </h6>
-</ng-container>
+        <div
+          class="p-0 mx-4 my-4 card"
+          style="width: 300px"
+          *ngFor="let producto of productosJson"
+        >
+          <div >
+            <img
+              class="px-0 mx-0 card-img-top"
+              src="{{ producto.ruta }}"
+              alt="Card image"
+            />
+            <div class="card-body">
+              <h4 class="card-title">{{ producto.nombre }}</h4>
+              <h5 class="card-text">{{ producto.precio }}€</h5>
+              <!-- Correcto: Usa ng-container y las directivas directamente -->
+              <ng-container *ngFor="let marca of marcas">
+                <h6 *ngIf="marca.id === producto.marca">
+                  {{ marca.nombre }}
+                </h6>
+              </ng-container>
 
-
-
-            <a href="#" [routerLink]="['/detalle', producto.id]"  class="btn btn-mo">Ver más</a>
+              <a
+                href="#"
+                [routerLink]="['/detalle', producto.id]"
+                class="btn btn-mo"
+                >Ver más</a
+              >
+            </div>
           </div>
-        </div>
         </div>
       </div>
     </div>
-
   </div>
 </div>

@@ -128,7 +128,8 @@ export class ApiService {
   }
 
   isAutenticated(): boolean {
-    if (this.cookieExists('jwt') != null) {
+    if (this.cookieExists('jwt')) {
+      //alert("existe la cookie");
       return true;
     } else {
       return false;
@@ -136,34 +137,27 @@ export class ApiService {
   }
 
   cookieExists(cookieName: string): boolean {
-    if (typeof window !== 'undefined') {
-
     const cookies = document.cookie;
     const cookieArray = cookies.split(';');
     for (let i = 0; i < cookieArray.length; i++) {
         let cookie = cookieArray[i].trim();
         if (cookie.startsWith(cookieName + '=')) {
+          //alert('empieza con jwt')
             return true;
         }
     }
     return false;
-    }else{
-      return false;
-    }
-
 }
 
 isAdmin(): boolean {
-  if (typeof window !== 'undefined') {
     let rol = localStorage.getItem('rol');
-  if (rol === 'admin') {
+  if (rol == 'admin') {
     return true;
   }else{
     return false;
   }
-  }else{
-    return false;
-  }
+
+
 
 }
 
