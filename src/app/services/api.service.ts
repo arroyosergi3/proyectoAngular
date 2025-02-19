@@ -99,7 +99,6 @@ export class ApiService {
 
   }
 
-  // Obtener el rol del usuario autenticado desde localStorage
   getRolUsuario(): string  {
     if (typeof window !== 'undefined') {
    var rol = localStorage.getItem('rol');
