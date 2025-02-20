@@ -85,7 +85,6 @@ export class BackendComponent implements OnInit{
     this.apiservice.insertMarca(this.nombreMarca).subscribe({
       next: (response) => {
         alert("Marca insertada con exito");
-
         setTimeout(() => {
           this.router.navigate(['/backend']);
         }, 2000);

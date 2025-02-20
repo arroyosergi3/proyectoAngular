@@ -101,10 +101,11 @@ export class AlquilarProductoComponent implements OnInit {
             this.apiService.insertAlquiler(id_producto, this.idUsuario, fecha_inicio, fecha_fin).subscribe(
               (response) => {
                 if(response.bien != null){
-                  alert("ha ido bien")
+                  alert("Producto alquilado correctamente")
                 }
                 if(response.mal != null){
-                  alert(response.mal)
+                  alert("Error al alquilar el producto")
+                  //alert(response.mal)
                 }
               },
               (error) => {

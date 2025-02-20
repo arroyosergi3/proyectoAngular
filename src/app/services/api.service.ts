@@ -189,7 +189,7 @@ isAdmin(): boolean {
     const body = { nombre };
     return this.http.post<any>(this.apiUrl + "marcas/anadirnuevo  ", body);
   }
-  insertAlquiler( idusuario: string, idProducto : string, fecha_inicio : string, fecha_fin:string){
+  insertAlquiler( idProducto: string, idusuario : string, fecha_inicio : string, fecha_fin:string){
     const body = {
       id_usuario: { id: idusuario },
       id_producto: { id: idProducto },
