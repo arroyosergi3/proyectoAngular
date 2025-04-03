@@ -1,4 +1,5 @@
 #NOTA: ESTE PROYECTO FUNCIONA CON UNA API DE SPRINGBOOT (Que también está en mis repositorios)
+
 Proyecto Angular
 
 Este es un proyecto desarrollado con Angular. Fue generado utilizando Angular CLI versión 19.0.7.
